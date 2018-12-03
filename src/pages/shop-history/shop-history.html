@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="asphalt">
+    <button ion-button menuToggle (click)="addClass()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
+      </button>
+      <div class="itemOfCarts">
+        <div>15</div>
+      </div>
+    </ion-buttons>
+    <ion-title>IRON ADDICTS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <h3 style="font-size: large">История покупок</h3>
+  <ion-list class="categories" no-lines>
+    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
+      <img class="news-small-img" src="../../assets/imgs/melatonon.jpg" alt="">
+      <div class="shop-history-title">BCAA PRO Effect premium</div>
+      <div class="cost">99999 тенге</div>
+      <div class="date">25.04.1996</div>
+    </ion-item>
+    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
+      <img class="news-small-img" src="../../assets/imgs/mel.jpg" alt="">
+      <div class="shop-history-title">BCAA PRO Effect premium</div>
+      <div class="cost">99999 тенге</div>
+      <div class="date">25.04.1996</div>
+    </ion-item>
+    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
+      <img class="news-small-img" src="../../assets/imgs/images.jpg" alt="">
+      <div class="shop-history-title">BCAA PRO Effect premium</div>
+      <div class="cost">99999 тенге</div>
+      <div class="date">25.04.1996</div>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-navbar color="asphalt">
+    <button ion-button menuToggle (click)="addClass()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
+      </button>
+      <div class="itemOfCarts" style="display: table;">
+        <div>{{count}}</div>
+      </div>
+    </ion-buttons>
+    <ion-title>IRON ADDICTS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h3 style="font-size: large">Корзина</h3>
+  <ion-list class="categories" no-lines>
+    <div style="height: 24%; margin-bottom: 4%;" *ngFor="let i of kek">
+      <ion-item class="cart-item" no-padding (click)="pushToPage()">
+        <img class="news-small-img" src="../../assets/imgs/melatonon.jpg" alt="">
+        <div class="shop-history-title">BCAA PRO Effect premium</div>
+        <div class="cost">99999 тенге</div>
+        <div class="date">25.04.1996</div>
+      </ion-item>
+      <div style="height: 30%; width: 100%; background-color: #2a2a2a;">
+        <div class="gradient"
+             style="height: 100%; width: 13.5%; float: right; margin-left: 1%; text-align: center; vertical-align: middle;">
+          <img style="margin-top: 17%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* vertical-align: bottom; */
+    height: 45%;" src="../../assets/imgs/trash.png" alt="">
+        </div>
+        <div style="height: 100%; width: 25%; background-color: black; float: right; margin-left: 1%;">
+          <div style="text-align: center; line-height: 255%; color: #ff0000;">99999 тнг</div>
+        </div>
+        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="changeCount('plus');$event.stopPropagation();">
+          <div style="text-align: center; line-height: 170%;font-size: 2.3rem; font-family: Arial;">+</div>
+        </div>
+        <div style="height: 100%; width: 12%; background-color: black; float: right; margin-left: 1%;">
+          <div style="text-align: center; line-height: 260%; color: #ff0000;font-weight: bold; font-family: Roboto;">
+            {{count}}
+          </div>
+        </div>
+        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="changeCount('minus');$event.stopPropagation();">
+          <div style="text-align: center; line-height: 170%;font-size: 2.3rem;font-family: Arial;">-</div>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+<ion-footer style="width: 100%; height: 14%;" no-padding>
+  <div style="height: 50%; width: 100%; background-color: #2a2a2a">
+    <div style="
+    display: inline-block;
+    line-height: 333%;
+    margin-left: 3%;
+    font-family: MainFont;
+    color: white;">
+      Количество: <span style="color: #ff0000; font-weight: bold;">{{count}}</span>
+    </div>
+    <div style="
+    display: inline-block;
+    line-height: 333%;
+    margin-right: 3%;
+    font-family: MainFont;
+    color: white;
+    float: right;">
+      Итого: <span style="color: #ff0000; font-weight: bold;">99999 тнг</span>
+    </div>
+  </div>
+  <div class="gradient" style="height: 50%; width: 100%; display:block;">
+    <div style="color: white; display:block; text-align: center; line-height: 280%;">перейти к оформлению</div>
+  </div>
+
+</ion-footer>

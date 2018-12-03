@@ -1,18 +1,23 @@
-<ion-menu [content]="content">
+<ion-menu [content]="content" (ionDrag)="addClass()" (ionOpen)="addClass()"(ionClose)="removeClass()">
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
+    <ion-toolbar class="sideMenuBar" style="background-color: #1c1c1c; border-bottom: white 1px;">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>IRON ADDICTS</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+  <ion-content class="sideMenu">
+    <ion-list no-lines>
+      <div style="display: inline-block;">
+        <button id="{{p.id}}" class="sideMenuButtons" [class.activeHighlight]="checkActive(p)" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <img [class.sideBarIcons]="!checkActive(p)" style="vertical-align: sub; max-height: 24px; max-width: 24px;" [src]="'../assets/imgs/' + p.img" alt="">
+          &nbsp;&nbsp;{{p.title}}
+        </button>
+      </div>
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->

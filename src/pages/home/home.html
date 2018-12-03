@@ -1,18 +1,121 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+  <ion-navbar color="asphalt">
+    <button ion-button menuToggle (click)="addClass()">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openCart()">
+        <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
+      </button>
+      <div class="itemOfCarts">
+        <div>15</div>
+      </div>
+    </ion-buttons>
+    <ion-title>IRON ADDICTS</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content>
+  <h3>Категории</h3>
+  <ion-list class="categories" no-lines>
+    <ion-item class="item-category" no-padding (click)="pushToPage()">
+      <div style="height: 100%;position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item><ion-item class="item-category" no-padding>
+    <div style="height: 100%; position: relative;">
+      <div class="rectangle"></div>
+      <div class="itemNames">Товары</div>
+      <div class="trapezoid" style="display:inline-block;"></div>
+    </div>
+  </ion-item>
+    <ion-item class="item-category" no-padding>
+      <div style="height: 100%; position: relative;">
+        <div class="rectangle"></div>
+        <div class="itemNames">Товары</div>
+        <div class="trapezoid" style="display:inline-block;"></div>
+      </div>
+    </ion-item>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  </ion-list>
 </ion-content>

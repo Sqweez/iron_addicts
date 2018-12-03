@@ -1,0 +1,19 @@
+<!--
+<div class="registerContainer content-md content content-ios" padding style="background-color: #000!important;">
+-->
+
+<ion-content style="background-color: #000!important;">
+  <img class="logoImage" style="" src="../assets/imgs/logoMain.png" alt="">
+  <ion-list>
+    <ion-item class="registerInput">
+      <ion-input placeholder="Телефон" clearInput="" [(ngModel)]="data.phone"></ion-input>
+    </ion-item>
+    <ion-item class="registerInput">
+      <ion-input placeholder="ФИО" clearInput="" [(ngModel)]="data.fio"></ion-input>
+    </ion-item>
+    <ion-item id="confirmCode" class="registerInput" style="display: none">
+      <ion-input placeholder="Код потверждения" clearInput=""[(ngModel)]="data.confirmCode"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button id="registerButton" ion-button class="gradient fullButton" style="font-size: 2rem;" block (click)="getCode(data)">ПОЛУЧИТЬ КОД</button>
+</ion-content>

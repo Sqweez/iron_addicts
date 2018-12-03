@@ -1,5 +1,7 @@
 {
   "name": "IronAdd",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
