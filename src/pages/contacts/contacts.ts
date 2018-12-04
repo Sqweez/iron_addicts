@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {CartPage} from "../cart/cart";
 import * as $ from "jquery";
+import {Http} from "@angular/http";
+import {Observable} from "rxjs/Observable";
+import {CacheService} from "ionic-cache";
 
 /**
  * Generated class for the ContactsPage page.
@@ -16,12 +19,16 @@ import * as $ from "jquery";
   templateUrl: 'contacts.html',
 })
 export class ContactsPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  contacts: Observable<any>;
+  subKey = 'contacts';
+  key = 'contacts';
+  constructor(public cache: CacheService, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
+    this.cache.clearAll();
+    this.getContacts();
+    console.log(localStorage.getItem("cart-item-count"));
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactsPage');
   }
   openCart(){
     this.navCtrl.push(CartPage);
@@ -29,5 +36,16 @@ export class ContactsPage {
   addClass(){
     let element = $('.content');
     element.addClass("blurredContent");
+  }
+
+  getContacts(){
+    let url = "http://iron.controlsoft.kz/mobile-app.php";
+    let postData = new FormData();
+    postData.append("action", "getContacts");
+    let req = this.http.post(url, postData)
+      .map(res => {
+        return res.json();
+      });
+    this.contacts = this.cache.loadFromObservable(this.key, req, this.subKey);
   }
 }

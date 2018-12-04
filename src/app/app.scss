@@ -220,7 +220,8 @@ and (max-device-width : 1024px){
 }
 
 .itemNames {
-  width: 60%; display: inline-block; margin-left: -1%
+  width: 60%; display: inline-block; margin-left: -1%;
+  white-space: normal;
 }
 .item-category > .item-inner{
   padding-right: 0!important;
@@ -301,9 +302,13 @@ and (max-device-width : 1024px){
   margin-left: 5%;
 }
 .itemName {
-  display: inline;
+  display: inline-block;
+  float: right;
   vertical-align: top;
   margin-left: 3%;
+  width: 55%;
+  white-space: normal;
+  font-size: 1.5rem;
 }
 .parallelogram {
   position: fixed;

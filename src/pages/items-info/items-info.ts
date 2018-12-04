@@ -15,8 +15,10 @@ import {CartPage} from "../cart/cart";
   templateUrl: 'items-info.html',
 })
 export class ItemsInfoPage {
-
+  product: any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.product = this.navParams.get("item");
+    console.log(this.product);
   }
 
   ionViewDidLoad() {

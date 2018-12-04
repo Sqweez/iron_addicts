@@ -17,14 +17,16 @@
 
 
 <ion-content>
-  <img class="item-info-img" src="../../assets/imgs/mel.jpg" alt="">
-  <h5 class="item-info-name">MELATONIN | 60CAP | CYBERMASS</h5>
+  <img class="item-info-img" [src]="'http://iron.controlsoft.kz/' + product.product_img" alt="">
+  <h5 class="item-info-name">{{product.product_name}}</h5>
   <div class="item-info-block">
-    <div class="item-info-button-text">99999 ТЕНГЕ</div>
+    <div class="item-info-button-text">{{product.product_price | number : "1.0-0"}} ТЕНГЕ</div>
   </div>
   <div class="item-info-to-cart">
-    <div class="item-info-button-text">В КОРЗИНУ</div>
+    <div class="item-info-button-text" (click)="addToCart()">В КОРЗИНУ</div>
   </div>
   <h5 style="padding-left: 4%">ОПИСАНИЕ:</h5>
-  <p class="item-info-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consectetur debitis eum facere in laudantium libero maiores quo sed sequi vitae voluptas, voluptates! A at autem delectus dignissimos fuga ipsum modi neque nisi ut? Alias architecto aspernatur autem beatae consequatur, dolor eos facere fuga hic itaque iusto maiores, minima molestiae necessitatibus nesciunt odit optio rem sapiente sequi similique soluta, tempora velit voluptates! A beatae debitis dicta ducimus et ex hic illo illum incidunt iusto laudantium minima molestias mollitia quaerat quod repellendus, repudiandae vero voluptatum. Cupiditate distinctio eligendi facilis mollitia nam necessitatibus provident qui rem? Autem doloremque ea id maxime soluta!</p>
+  <p class="item-info-description">{{(product.product_desc)}}</p>
+  <h5 style="padding-left: 4%">ВКУС:</h5>
+  <p class="item-info-description">{{product.product_vkus}}</p>
 </ion-content>

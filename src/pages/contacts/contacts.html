@@ -18,33 +18,35 @@
 
 <ion-content>
   <h3>КОНТАКТЫ</h3>
-  <div class="contact-item">
-    <img src="../../assets/imgs/kontakt.png" alt="">
-    <div class="contact-text">+7 705 300 02 27</div>
-  </div>
-  <div class="contact-item">
-  <img style="margin-top: 3.3%; height: 16px;" src="../../assets/imgs/email_icon.png" alt="">
-    <div class="contact-text">example@mail.com</div>
-  </div>
-  <div class="contact-item">
-    <img style="margin-top: 2.5%" src="../../assets/imgs/vk.png" alt="">
-    <div class="contact-text">vk.com/ironpvl</div>
-  </div>
-  <div class="contact-item">
-    <img src="../../assets/imgs/instagram-new.png" style="margin-top: 2%;" alt="">
-    <div class="contact-text">iron_addicts_pvl</div>
-  </div>
-  <div class="contact-item">
-    <img src="../../assets/imgs/yckedbozi.png" alt="">
-    <div class="contact-text">www.ironaddicts.kz</div>
-  </div>
-  <div class="contact-item">
-    <img style="margin-left: 3.5%;" src="../../assets/imgs/address.png" alt="">
-    <div class="contact-text">ул. сатпаева 154, бутик 4</div>
-  </div>
-  <div class="contact-item">
-    <img src="../../assets/imgs/calendar.png" alt="">
-    <div class="contact-text">9:00 - 20:00</div>
+  <div *ngFor="let item of contacts | async">
+    <div class="contact-item">
+      <img src="../../assets/imgs/kontakt.png" alt="">
+      <div class="contact-text">{{item.phone}}</div>
+    </div>
+    <div class="contact-item">
+      <img style="margin-top: 3.3%; height: 16px;" src="../../assets/imgs/email_icon.png" alt="">
+      <div class="contact-text">example@mail.com</div>
+    </div>
+    <div class="contact-item">
+      <img style="margin-top: 2.5%" src="../../assets/imgs/vk.png" alt="">
+      <div class="contact-text">vk.com/ironpvl</div>
+    </div>
+    <div class="contact-item">
+      <img src="../../assets/imgs/instagram-new.png" style="margin-top: 2%;" alt="">
+      <div class="contact-text">iron_addicts_pvl</div>
+    </div>
+    <div class="contact-item">
+      <img src="../../assets/imgs/yckedbozi.png" alt="">
+      <div class="contact-text">www.ironaddicts.kz</div>
+    </div>
+    <div class="contact-item">
+      <img style="margin-left: 3.5%;" src="../../assets/imgs/address.png" alt="">
+      <div class="contact-text">ул. сатпаева 154, бутик 4</div>
+    </div>
+    <div class="contact-item">
+      <img src="../../assets/imgs/calendar.png" alt="">
+      <div class="contact-text">9:00 - 20:00</div>
+    </div>
   </div>
   <button ion-button class="gradient fullButton" style="height: 50px; width: 70%; margin-top: 10%;" block >написать продавцу</button>
 </ion-content>

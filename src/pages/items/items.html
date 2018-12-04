@@ -19,19 +19,19 @@
 <ion-content>
   <h3>Название подкатегории</h3>
   <ion-list class="categories" no-lines>
-    <ion-item class="itemsList" no-padding (click)="pushToPage()">
+    <ion-item class="itemsList" *ngFor="let item of products | async" no-padding (click)="pushToPage(item)">
       <div style="height: 100%;">
-        <img class="item-small-img" src="../../assets/imgs/mel.jpg" alt="">
-        <div class="itemName">BCAA PRO Effect premium</div>
+        <img class="item-small-img" [src]="'http://iron.controlsoft.kz/' + item.product_img" alt="">
+        <div class="itemName">{{item.product_name}}</div>
         <div class="parallelogram">
-          <p>5000 тг</p>
+          <p>{{item.product_price | number: "1.0-0"}} тнг</p>
         </div>
-        <div class="buttonAdd" (click)="lel('keke');$event.stopPropagation();">
+        <div class="buttonAdd" (click)="addToCart(item);$event.stopPropagation();">
           <p>+</p>
         </div>
       </div>
     </ion-item>
-    <ion-item class="itemsList" no-padding (click)="lel('meme')">
+  <!--  <ion-item class="itemsList" no-padding (click)="lel('meme')">
       <div style="height: 100%;">
         <img class="item-small-img" src="../../assets/imgs/mel.jpg" alt="">
         <div class="itemName">BCAA PRO Effect premium</div>
@@ -42,6 +42,6 @@
           <p>+</p>
         </div>
       </div>
-    </ion-item>
+    </ion-item>-->
   </ion-list>
 </ion-content>

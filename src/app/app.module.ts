@@ -19,6 +19,12 @@ import {ItemsInfoPage} from "../pages/items-info/items-info";
 import {ItemsPage} from "../pages/items/items";
 import {ShopHistoryPage} from "../pages/shop-history/shop-history";
 import {NewsInfoPage} from "../pages/news-info/news-info";
+import {SQLite} from "@ionic-native/sqlite";
+import {HttpModule} from "@angular/http";
+import {CacheModule} from "ionic-cache";
+import { DatabaseProvider } from '../providers/database/database';
+import {SQLitePorter} from "@ionic-native/sqlite-porter";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -37,11 +43,14 @@ import {NewsInfoPage} from "../pages/news-info/news-info";
     NewsInfoPage
   ],
   imports: [
+    CacheModule.forRoot(),
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       scrollAssist: true,
       autoFocusAssist: true
-    })
+    }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,7 +72,10 @@ import {NewsInfoPage} from "../pages/news-info/news-info";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    NativePageTransitions
+    NativePageTransitions,
+    SQLite,
+    DatabaseProvider,
+    SQLitePorter
   ]
 })
 export class AppModule {}

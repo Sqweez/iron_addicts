@@ -15,6 +15,7 @@ import {ContactsPage} from "../pages/contacts/contacts";
 import {ItemsPage} from "../pages/items/items";
 import {ItemsInfoPage} from "../pages/items-info/items-info";
 import {MyProfilePage} from "../pages/my-profile/my-profile";
+import {DatabaseProvider} from "../providers/database/database";
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +29,6 @@ export class MyApp {
   activePage: any;
   constructor(public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-
 
     // used for an example of ngFor and navigation
     this.pages = [
