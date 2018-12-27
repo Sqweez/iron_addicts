@@ -7,8 +7,8 @@
       <button ion-button icon-only (click)="openCart()">
         <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
       </button>
-      <div class="itemOfCarts">
-        <div>15</div>
+      <div *ngIf="count!=0" class="itemOfCarts">
+        <div>{{count}}</div>
       </div>
     </ion-buttons>
     <ion-title>IRON ADDICTS</ion-title>
@@ -17,31 +17,20 @@
 
 
 <ion-content>
-  <h3>Название подкатегории</h3>
+  <h3>{{name}}</h3>
   <ion-list class="categories" no-lines>
     <ion-item class="itemsList" *ngFor="let item of products | async" no-padding (click)="pushToPage(item)">
       <div style="height: 100%;">
         <img class="item-small-img" [src]="'http://iron.controlsoft.kz/' + item.product_img" alt="">
         <div class="itemName">{{item.product_name}}</div>
         <div class="parallelogram">
-          <p>{{item.product_price | number: "1.0-0"}} тнг</p>
+          <p *ngIf="item.count > 0">{{item.product_price | number: "1.0-0"}} тнг</p>
+          <p *ngIf="item.count == 0">нет в наличии</p>
         </div>
         <div class="buttonAdd" (click)="addToCart(item);$event.stopPropagation();">
           <p>+</p>
         </div>
       </div>
     </ion-item>
-  <!--  <ion-item class="itemsList" no-padding (click)="lel('meme')">
-      <div style="height: 100%;">
-        <img class="item-small-img" src="../../assets/imgs/mel.jpg" alt="">
-        <div class="itemName">BCAA PRO Effect premium</div>
-        <div class="parallelogram">
-          <p>99999 тг</p>
-        </div>
-        <div class="buttonAdd" (click)="lel('keke');$event.stopPropagation();">
-          <p>+</p>
-        </div>
-      </div>
-    </ion-item>-->
   </ion-list>
 </ion-content>

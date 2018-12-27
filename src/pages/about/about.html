@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="asphalt">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openCart()">
+        <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
+      </button>
+      <div *ngIf="count != 0" class="itemOfCarts">
+        <div>{{count}}</div>
+      </div>
+    </ion-buttons>
+    <ion-title>IRON ADDICTS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<ng-container *ngFor="let item of data">
+  <h4 style="text-align: center;">{{item.name}}</h4>
+  <p style="text-align: justify;">{{item.desc}}</p>
+  <button ion-button class="gradient fullButton" style="height: 50px; width: 70%; margin-top: 10%;" block  (click)="contact(item)">связаться с нами</button>
+</ng-container>
+</ion-content>

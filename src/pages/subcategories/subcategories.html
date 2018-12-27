@@ -7,8 +7,8 @@
       <button ion-button icon-only (click)="openCart()">
         <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
       </button>
-      <div class="itemOfCarts">
-        <div>15</div>
+      <div *ngIf="count!=0" class="itemOfCarts">
+        <div>{{count}}</div>
       </div>
     </ion-buttons>
     <ion-title>IRON ADDICTS</ion-title>
@@ -16,106 +16,14 @@
 </ion-header>
 
 <ion-content>
-  <h3>Подкатегории</h3>
+  <h3>{{name}}</h3>
   <ion-list class="categories" no-lines>
-    <ion-item class="item-category" no-padding (click)="pushToPage()">
+    <ion-item *ngFor="let item of subcategories | async" class="item-category animation" no-padding (click)="pushToPage(item.subcategory_id, item.subcategory_name)">
       <div style="height: 100%; position: relative;">
         <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
+        <div class="itemNames">{{item.subcategory_name}}</div>
         <div class="trapezoid" style="display:inline-block;"></div>
       </div>
     </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item><ion-item class="item-category" no-padding>
-    <div style="height: 100%; position: relative;">
-      <div class="rectangle"></div>
-      <div class="itemNames">Товары</div>
-      <div class="trapezoid" style="display:inline-block;"></div>
-    </div>
-  </ion-item>
-    <ion-item class="item-category" no-padding>
-      <div style="height: 100%; position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames">Товары</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-
-
   </ion-list>
 </ion-content>

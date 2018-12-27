@@ -7,8 +7,8 @@
       <button ion-button icon-only (click)="openCart()">
         <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
       </button>
-      <div class="itemOfCarts">
-        <div>15</div>
+      <div *ngIf="count!=0" class="itemOfCarts">
+        <div>{{count}}</div>
       </div>
     </ion-buttons>
     <ion-title>IRON ADDICTS</ion-title>
@@ -20,13 +20,21 @@
   <img class="item-info-img" [src]="'http://iron.controlsoft.kz/' + product.product_img" alt="">
   <h5 class="item-info-name">{{product.product_name}}</h5>
   <div class="item-info-block">
-    <div class="item-info-button-text">{{product.product_price | number : "1.0-0"}} ТЕНГЕ</div>
+    <div *ngIf="product.count > 0" class="item-info-button-text">{{product.product_price | number : "1.0-0"}} ТЕНГЕ</div>
+    <div *ngIf="product.count == 0" class="item-info-button-text">НЕТ В НАЛИЧИИ</div>
   </div>
   <div class="item-info-to-cart">
-    <div class="item-info-button-text" (click)="addToCart()">В КОРЗИНУ</div>
+    <div class="item-info-button-text" (click)="addToCart(product)">В КОРЗИНУ</div>
   </div>
   <h5 style="padding-left: 4%">ОПИСАНИЕ:</h5>
   <p class="item-info-description">{{(product.product_desc)}}</p>
-  <h5 style="padding-left: 4%">ВКУС:</h5>
-  <p class="item-info-description">{{product.product_vkus}}</p>
+  <h5 *ngIf="product_count > 0" style="padding-left: 4%">ДОСТУПНЫЕ ВКУСЫ:</h5>
+  <ion-list radio-group [(ngModel)]="vkus" no-lines>
+    <ng-container *ngFor="let item of product_vkus">
+      <ion-item *ngIf="item.product_count > 0">
+        <ion-label>{{item.product_vkus}} ({{item.product_count}})</ion-label>
+        <ion-radio color="iron_add" [value]="item.product_id"></ion-radio>
+      </ion-item>
+    </ng-container>
+  </ion-list >
 </ion-content>

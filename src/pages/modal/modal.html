@@ -1,0 +1,41 @@
+<!--
+  Generated template for the ModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content style="position: absolute;
+    top: calc(50% - (50%/2));
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    padding: 10px;
+    z-index: 100;
+    margin: 0 auto;
+    padding: 10px;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(51, 51, 51, .35);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;">
+  <h5 style="padding-left: 4%; color: #ff0000; display:inline-block;">ВЫБЕРИТЕ ВКУС:</h5>
+  <div (click)="dismiss()" style="height: 35px; width: 35px; background-image: linear-gradient(to bottom, #ea0000, #d70000, #c30001, #b00001, #9e0000); display: inline-block; float: right; color: #fff; text-align: center;"><div style="    font-size: 4rem;
+    font-weight: bold;
+    margin-top: -5px;">&times;</div></div>
+  <ion-list radio-group [(ngModel)]="vkus" no-lines no-margin no-padding>
+    <ng-container *ngFor="let item of items">
+      <ion-item *ngIf="item.product_count > 0">
+        <ion-label>{{item.product_vkus}} ({{item.product_count}})</ion-label>
+        <ion-radio color="iron_add" [value]="item.product_id"></ion-radio>
+      </ion-item>
+    </ng-container>
+  </ion-list >
+  <div style="text-align: center;">
+    <button (click)="addToCart()" ion-button style="height: 45px; width: 250px;background-image: linear-gradient(to bottom, #ea0000, #d70000, #c30001, #b00001, #9e0000);
+">В КОРЗИНУ</button>
+  </div>
+
+</ion-content>

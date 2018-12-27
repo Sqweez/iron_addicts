@@ -25,6 +25,15 @@ import {CacheModule} from "ionic-cache";
 import { DatabaseProvider } from '../providers/database/database';
 import {SQLitePorter} from "@ionic-native/sqlite-porter";
 import {IonicStorageModule} from "@ionic/storage";
+import {BrMaskerModule} from "brmasker-ionic-3";
+import {EmailComposer} from "@ionic-native/email-composer";
+import {CallNumber} from "@ionic-native/call-number";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {ModalPage} from "../pages/modal/modal";
+import {AboutPage} from "../pages/about/about";
+import {ModalDostavkaPage} from "../pages/modal-dostavka/modal-dostavka";
+import {MakeOrderPage} from "../pages/make-order/make-order";
+import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
 
 @NgModule({
   declarations: [
@@ -40,15 +49,22 @@ import {IonicStorageModule} from "@ionic/storage";
     ItemsInfoPage,
     ItemsPage,
     ShopHistoryPage,
-    NewsInfoPage
+    NewsInfoPage,
+    ModalPage,
+    AboutPage,
+    ModalDostavkaPage,
+    MakeOrderPage,
+    ItemInfoCartPage
   ],
   imports: [
+    BrMaskerModule,
     CacheModule.forRoot(),
     HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       scrollAssist: true,
-      autoFocusAssist: true
+      autoFocusAssist: true,
+      scrollPadding: false
     }),
     IonicStorageModule.forRoot()
   ],
@@ -66,7 +82,12 @@ import {IonicStorageModule} from "@ionic/storage";
     ItemsInfoPage,
     ItemsPage,
     ShopHistoryPage,
-    NewsInfoPage
+    NewsInfoPage,
+    ModalPage,
+    AboutPage,
+    ModalDostavkaPage,
+    MakeOrderPage,
+    ItemInfoCartPage
   ],
   providers: [
     StatusBar,
@@ -75,7 +96,10 @@ import {IonicStorageModule} from "@ionic/storage";
     NativePageTransitions,
     SQLite,
     DatabaseProvider,
-    SQLitePorter
+    SQLitePorter,
+    EmailComposer,
+    CallNumber,
+    InAppBrowser
   ]
 })
 export class AppModule {}

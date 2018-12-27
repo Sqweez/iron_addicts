@@ -7,6 +7,8 @@ import {Http} from "@angular/http";
 import "rxjs/add/operator/map";
 import {Observable} from "rxjs/Observable";
 import {DatabaseProvider} from "../../providers/database/database";
+import swal from "sweetalert";
+import {SplashScreen} from "@ionic-native/splash-screen";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -14,7 +16,7 @@ import {DatabaseProvider} from "../../providers/database/database";
 export class HomePage {
   count;
   categories: Observable<any>;
-  constructor(public database: DatabaseProvider, public http: Http, public navCtrl: NavController) {
+  constructor(public splashScreen: SplashScreen, public database: DatabaseProvider, public http: Http, public navCtrl: NavController) {
     $('#1').addClass('activeHighlight');
     $('#5').removeClass('activeHighlight');
     $('#1 > div > div > ion-label > img').removeClass('sideBarIcons');
@@ -28,12 +30,10 @@ export class HomePage {
     postData.append("action", "getCategories");
     let req = this.http.post(url, postData)
       .map(res => {
+        this.splashScreen.hide();
         return res.json();
       });
     this.categories = req;
-    this.categories.subscribe(res => {
-      console.log(res.length)
-    })
   }
 
 
@@ -47,8 +47,10 @@ export class HomePage {
     $('#1').removeClass('activeHighlight');
     $('#1 > div > div > ion-label > img').addClass('sideBarIcons');
   }
-  pushToPage(){
-    this.navCtrl.push(SubcategoriesPage)
+  pushToPage(id, name){
+    console.log(id);
+    let data = [id, name];
+    this.navCtrl.push(SubcategoriesPage, {data: data})
   }
 
   openCart(){

@@ -7,8 +7,8 @@
       <button ion-button icon-only (click)="openCart()">
         <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
       </button>
-      <div class="itemOfCarts">
-        <div>15</div>
+      <div *ngIf="count!=0" class="itemOfCarts">
+        <div>{{count}}</div>
       </div>
     </ion-buttons>
     <ion-title>IRON ADDICTS</ion-title>
@@ -19,34 +19,34 @@
 <ion-content>
   <h3>КОНТАКТЫ</h3>
   <div *ngFor="let item of contacts | async">
-    <div class="contact-item">
+    <div class="contact-item" (click)="call(item.phone)">
       <img src="../../assets/imgs/kontakt.png" alt="">
       <div class="contact-text">{{item.phone}}</div>
     </div>
-    <div class="contact-item">
+    <div class="contact-item" (click)="mail(item.mail)">
       <img style="margin-top: 3.3%; height: 16px;" src="../../assets/imgs/email_icon.png" alt="">
-      <div class="contact-text">example@mail.com</div>
+      <div class="contact-text">{{item.mail}}</div>
     </div>
-    <div class="contact-item">
+    <div class="contact-item" (click)="openURL(item.vk)">
       <img style="margin-top: 2.5%" src="../../assets/imgs/vk.png" alt="">
-      <div class="contact-text">vk.com/ironpvl</div>
+      <div class="contact-text">{{item.vk}}</div>
     </div>
-    <div class="contact-item">
+    <div class="contact-item" (click)="openInsta(item.insta)">
       <img src="../../assets/imgs/instagram-new.png" style="margin-top: 2%;" alt="">
-      <div class="contact-text">iron_addicts_pvl</div>
+      <div class="contact-text">{{item.insta}}</div>
     </div>
-    <div class="contact-item">
+    <div class="contact-item" (click)="openURL(item.site)">
       <img src="../../assets/imgs/yckedbozi.png" alt="">
-      <div class="contact-text">www.ironaddicts.kz</div>
+      <div class="contact-text">{{item.site}}</div>
     </div>
-    <div class="contact-item">
+    <div class="contact-item" (click)="open2GIS(item.address)">
       <img style="margin-left: 3.5%;" src="../../assets/imgs/address.png" alt="">
-      <div class="contact-text">ул. сатпаева 154, бутик 4</div>
+      <div class="contact-text">{{item.address}}</div>
     </div>
     <div class="contact-item">
       <img src="../../assets/imgs/calendar.png" alt="">
-      <div class="contact-text">9:00 - 20:00</div>
+      <div class="contact-text">{{item.worktime}}</div>
     </div>
+    <button ion-button class="gradient fullButton" style="height: 50px; width: 70%; margin-top: 10%;" block  (click)="openWhatsApp(item.phone)">написать продавцу</button>
   </div>
-  <button ion-button class="gradient fullButton" style="height: 50px; width: 70%; margin-top: 10%;" block >написать продавцу</button>
 </ion-content>

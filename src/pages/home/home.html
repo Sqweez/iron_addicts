@@ -18,17 +18,10 @@
 <ion-content>
   <h3>Категории</h3>
   <ion-list class="categories" no-lines>
-    <ion-item class="item-category" *ngFor="let item of categories | async" no-padding (click)="pushToPage()">
+    <ion-item class="item-category" *ngFor="let item of categories | async" no-padding (click)="pushToPage(item.category_id, item.category_name)">
       <div style="height: 100%;position: relative;">
         <div class="rectangle"></div>
         <div class="itemNames">{{item.category_name}}</div>
-        <div class="trapezoid" style="display:inline-block;"></div>
-      </div>
-    </ion-item>
-    <ion-item class="item-category" *ngFor="let item of categories | async" no-padding (click)="pushToPage()">
-      <div style="height: 100%;position: relative;">
-        <div class="rectangle"></div>
-        <div class="itemNames"><br>{{item.category_name}}</div>
         <div class="trapezoid" style="display:inline-block;"></div>
       </div>
     </ion-item>

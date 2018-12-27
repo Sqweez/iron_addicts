@@ -7,7 +7,7 @@
       <button ion-button icon-only (click)="openCart()">
         <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
       </button>
-      <div class="itemOfCarts">
+      <div *ngIf="count!=0" class="itemOfCarts">
         <div>15</div>
       </div>
     </ion-buttons>
@@ -20,25 +20,37 @@
   <h3 style="font-size: large">мой профиль</h3>
   <div class="contact-item">
     <div class="contact-text" style="float: left; margin-left: 2%;">ФИО</div>
-    <div class="contact-text">Иванов Иван Иванович</div>
+    <div class="contact-text">{{user_name}}</div>
   </div>
   <div class="contact-item">
     <div class="contact-text" style="float: left; margin-left: 2%;">Телефон</div>
-    <div class="contact-text">+7 705 904 54 67</div>
+    <div class="contact-text">{{user_phone}}</div>
   </div>
   <div class="contact-item">
     <div class="contact-text" style="float: left; margin-left: 2%;">Баланс</div>
-    <div class="contact-text">99999 тнг</div>
+    <div class="contact-text">{{user_balance}} тнг</div>
   </div>
   <h3 style="font-size: large">История покупок</h3>
   <ion-list class="categories" no-lines>
-    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
-      <img class="news-small-img" src="../../assets/imgs/melatonon.jpg" alt="">
-      <div class="shop-history-title">BCAA PRO Effect premium</div>
-      <div class="cost">99999 тенге</div>
-      <div class="date">25.04.1996</div>
+    <ion-item class="itemsList" *ngFor="let item of data" no-padding (click)="pushToPage(item)">
+      <div style="height: 100%;">
+        <img class="item-small-img" style="max-height: 80px;" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+        <div class="itemName" style="width: 60%;">{{item.product_name}}
+          <div style="margin-top: 20%;">{{item.price}} тенге</div>
+        </div>
+        <div class="date">{{item.date}}</div>
+      </div>
     </ion-item>
+  </ion-list>
+
+<!--  <ion-list class="categories" no-lines *ngFor="let item of data">
     <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
+      <img class="news-small-img" [src]="'http://iron.controlsoft.kz/' + item.img"  alt="">
+      <div class="shop-history-title">{{item.product_name}}</div>
+      <div class="cost">{{item.price}} тенге</div>
+      <div class="date">{{item.date}}</div>
+    </ion-item>-->
+<!--    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
       <img class="news-small-img" src="../../assets/imgs/mel.jpg" alt="">
       <div class="shop-history-title">BCAA PRO Effect premium</div>
       <div class="cost">99999 тенге</div>
@@ -49,6 +61,6 @@
       <div class="shop-history-title">BCAA PRO Effect premium</div>
       <div class="cost">99999 тенге</div>
       <div class="date">25.04.1996</div>
-    </ion-item>
-  </ion-list>
+    </ion-item>-->
+ <!-- </ion-list>-->
 </ion-content>

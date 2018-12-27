@@ -1,0 +1,49 @@
+<!--
+  Generated template for the MakeOrderPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>IRON ADDICTS</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <h4 style="text-align: center; color: #ff0000">Оформление заказа</h4>
+  <h5 style="text-align: center; margin-top: 10%;">выберите вариант доставки</h5>
+  <ion-list radio-group [(ngModel)]="dostavka" no-lines no-margin no-padding>
+    <ion-item>
+      <ion-label>Самовывоз</ion-label>
+      <ion-radio color="iron_add" [value]="1"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Доставка курьером</ion-label>
+      <ion-radio color="iron_add" [value]="2"></ion-radio>
+    </ion-item>
+  </ion-list>
+  <ng-container *ngIf="dostavka == 2">
+    <h5 style="text-align: center; margin-top: 10%;">выберите способ оплаты</h5>
+    <ion-list radio-group [(ngModel)]="oplata" no-lines no-margin no-padding>
+      <ion-item>
+        <ion-label>Наличными</ion-label>
+        <ion-radio color="iron_add" [value]="1"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>банковской картой</ion-label>
+        <ion-radio color="iron_add" [value]="2"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  <h5 style="text-align: center; margin-top: 10%;">комментарий (по желанию)</h5>
+  <ion-textarea placeholder="Введите комментарий" rows="5" style="background: #252525; padding-top: 1%;" [(ngModel)]="comment">
+  </ion-textarea>
+  <div style="text-align: center;">
+    <button (click)="buy(dostavka, oplata, comment)" ion-button style="height: 45px; width: 250px;background-image: linear-gradient(to bottom, #ea0000, #d70000, #c30001, #b00001, #9e0000);
+">купить</button>
+  </div>
+</ion-content>

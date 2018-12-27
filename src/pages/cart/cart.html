@@ -7,8 +7,8 @@
       <button ion-button icon-only>
         <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
       </button>
-      <div class="itemOfCarts" style="display: table;">
-        <div>{{count}}</div>
+      <div *ngIf="count!=0" class="itemOfCarts">
+        <div>{{getTotalCount()}}</div>
       </div>
     </ion-buttons>
     <ion-title>IRON ADDICTS</ion-title>
@@ -17,13 +17,15 @@
 
 <ion-content>
   <h3 style="font-size: large">Корзина</h3>
+
   <ion-list class="categories" no-lines>
-    <div style="height: 24%; margin-bottom: 4%;" *ngFor="let i of kek">
-      <ion-item class="cart-item" no-padding (click)="pushToPage()">
-        <img class="news-small-img" src="../../assets/imgs/melatonon.jpg" alt="">
-        <div class="shop-history-title">BCAA PRO Effect premium</div>
-        <div class="cost">99999 тенге</div>
-        <div class="date">25.04.1996</div>
+  <div style="height: 24%; margin-bottom: 4%;" *ngFor="let item of carts">
+      <ion-item class="cart-item" no-padding (click)="pushToPage(item.id)">
+        <img class="news-small-img" [src]="'http://iron.controlsoft.kz/' + item.product_img" alt="">
+        <div class="shop-history-title" style="margin-right: 3%">{{item.product_name}} | {{item.product_vkus}}
+        </div>
+        <div class="price">{{item.product_price}} тенге</div>
+        <div class="date">{{item.date}}</div>
       </ion-item>
       <div style="height: 30%; width: 100%; background-color: #2a2a2a;">
         <div class="gradient"
@@ -33,20 +35,20 @@
     margin-left: auto;
     margin-right: auto;
     /* vertical-align: bottom; */
-    height: 45%;" src="../../assets/imgs/trash.png" alt="">
+    height: 45%;" src="../../assets/imgs/trash.png" alt="" (click)="deleteItem(item.id, item.count)">
         </div>
         <div style="height: 100%; width: 25%; background-color: black; float: right; margin-left: 1%;">
-          <div style="text-align: center; line-height: 255%; color: #ff0000;">99999 тнг</div>
+          <div style="text-align: center; line-height: 255%; color: #ff0000;">{{getCost(item.product_price, item.count)}} тнг</div>
         </div>
-        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="changeCount('plus');$event.stopPropagation();">
+        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="updateProductCount(item.id, item.count, '+', item.sklad_count);$event.stopPropagation();">
           <div style="text-align: center; line-height: 170%;font-size: 2.3rem; font-family: Arial;">+</div>
         </div>
         <div style="height: 100%; width: 12%; background-color: black; float: right; margin-left: 1%;">
           <div style="text-align: center; line-height: 260%; color: #ff0000;font-weight: bold; font-family: Roboto;">
-            {{count}}
+            {{getCount(item.count)}}
           </div>
         </div>
-        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="changeCount('minus');$event.stopPropagation();">
+        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="updateProductCount(item.id, item.count, '-', item.sklad_count);$event.stopPropagation();">
           <div style="text-align: center; line-height: 170%;font-size: 2.3rem;font-family: Arial;">-</div>
         </div>
       </div>
@@ -61,7 +63,7 @@
     margin-left: 3%;
     font-family: MainFont;
     color: white;">
-      Количество: <span style="color: #ff0000; font-weight: bold;">{{count}}</span>
+      Количество: <span style="color: #ff0000; font-weight: bold;">{{getTotalCount()}}</span>
     </div>
     <div style="
     display: inline-block;
@@ -70,10 +72,10 @@
     font-family: MainFont;
     color: white;
     float: right;">
-      Итого: <span style="color: #ff0000; font-weight: bold;">99999 тнг</span>
+      Итого: <span style="color: #ff0000; font-weight: bold;">{{getTotalPrice()}} тнг</span>
     </div>
   </div>
-  <div class="gradient" style="height: 50%; width: 100%; display:block;">
+  <div class="gradient" style="height: 50%; width: 100%; display:block;" (click)="buy()">
     <div style="color: white; display:block; text-align: center; line-height: 280%;">перейти к оформлению</div>
   </div>
 
