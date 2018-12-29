@@ -41,7 +41,7 @@ export class DatabaseProvider {
   }
 
   fillDatabase() {
-    let sql = 'create table IF NOT EXISTS `cart` (id INTEGER PRIMARY KEY, product_name TEXT, count INTEGER, product_price TEXT, product_img TEXT, product_vkus TEXT, product_desc TEXT, date TEXT, sklad_count INTEGER)';
+    let sql = 'create table IF NOT EXISTS `cart` (id INTEGER PRIMARY KEY, product_name TEXT, count INTEGER, product_price TEXT, product_img TEXT, product_vkus TEXT, product_desc TEXT, date TEXT, sklad_count INTEGER, massa TEXT)';
     this.database.executeSql(sql, []).then(res => {
       this.databaseReady.next(true);
       this.storage.set("database_filled", true);
@@ -49,9 +49,9 @@ export class DatabaseProvider {
   }
 
   addToCart(id, item, date) {
-    let data = [id, item.product_name, 1, item.product_price, item.product_img, item.product_vkus, item.product_desc, date, 0];
+    let data = [id, item.product_name, 1, item.product_price, item.product_img, item.product_vkus, item.product_desc, date, 0, item.massa];
     console.log(data);
-    return this.database.executeSql("INSERT INTO cart (id, product_name, count, product_price, product_img, product_vkus, product_desc, date, sklad_count) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", data).then(res => {
+    return this.database.executeSql("INSERT INTO cart (id, product_name, count, product_price, product_img, product_vkus, product_desc, date, sklad_count, massa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data).then(res => {
       console.log("res = " + res);
     })
   }
@@ -81,7 +81,8 @@ export class DatabaseProvider {
                 product_vkus: res.rows.item(i).product_vkus,
                 count: res.rows.item(i).count,
                 date: res.rows.item(i).date,
-                sklad_count: res.rows.item(i).sklad_count
+                sklad_count: res.rows.item(i).sklad_count,
+                massa: res.rows.item(i).massa
               })
           }
         }
@@ -135,7 +136,8 @@ export class DatabaseProvider {
                 product_vkus: res.rows.item(i).product_vkus,
                 count: count_at_cart,
                 date: res.rows.item(i).date,
-                sklad_count: count
+                sklad_count: count,
+                massa: res.rows.item(i).massa
               })
             })
           })

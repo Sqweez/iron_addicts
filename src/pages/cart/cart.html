@@ -22,7 +22,7 @@
   <div style="height: 24%; margin-bottom: 4%;" *ngFor="let item of carts">
       <ion-item class="cart-item" no-padding (click)="pushToPage(item.id)">
         <img class="news-small-img" [src]="'http://iron.controlsoft.kz/' + item.product_img" alt="">
-        <div class="shop-history-title" style="margin-right: 3%">{{item.product_name}} | {{item.product_vkus}}
+        <div class="shop-history-title" style="margin-right: 3%">{{item.product_name}} | {{item.massa}} | {{item.product_vkus}}
         </div>
         <div class="price">{{item.product_price}} тенге</div>
         <div class="date">{{item.date}}</div>

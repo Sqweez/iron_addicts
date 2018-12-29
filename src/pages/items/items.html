@@ -22,7 +22,7 @@
     <ion-item class="itemsList" *ngFor="let item of products | async" no-padding (click)="pushToPage(item)">
       <div style="height: 100%;">
         <img class="item-small-img" [src]="'http://iron.controlsoft.kz/' + item.product_img" alt="">
-        <div class="itemName">{{item.product_name}}</div>
+        <div class="itemName">{{item.product_name}} | {{item.massa}}</div>
         <div class="parallelogram">
           <p *ngIf="item.count > 0">{{item.product_price | number: "1.0-0"}} тнг</p>
           <p *ngIf="item.count == 0">нет в наличии</p>

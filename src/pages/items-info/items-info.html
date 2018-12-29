@@ -18,7 +18,7 @@
 
 <ion-content>
   <img class="item-info-img" [src]="'http://iron.controlsoft.kz/' + product.product_img" alt="">
-  <h5 class="item-info-name">{{product.product_name}}</h5>
+  <h5 class="item-info-name">{{product.product_name}} | {{product.massa}}</h5>
   <div class="item-info-block">
     <div *ngIf="product.count > 0" class="item-info-button-text">{{product.product_price | number : "1.0-0"}} ТЕНГЕ</div>
     <div *ngIf="product.count == 0" class="item-info-button-text">НЕТ В НАЛИЧИИ</div>

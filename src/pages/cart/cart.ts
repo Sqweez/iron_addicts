@@ -31,6 +31,7 @@ export class CartPage {
     this.database.getDatabaseState().subscribe(val => {
       if (val) {
         this.database.getAllCartAtStart().then(data => {
+          console.log(data);
           this.carts = data;
         }).then(() => {
         });

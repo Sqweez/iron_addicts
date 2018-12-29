@@ -23,6 +23,7 @@ import {MyApp} from "../../app/app.component";
 export class RegisterPage {
   requestData: any;
   confirmCode;
+  push;
   data: any = {
     'phone': "",
     "fio": "",
@@ -63,6 +64,8 @@ export class RegisterPage {
         let confirmCode = Math.floor(Math.random()*(9999-1000+1)+1000);
         let postData = new FormData();
         postData.append("action", "auth");
+        let push = localStorage.getItem("push");
+        postData.append("push", push);
         postData.append("phone", data.phone);
         postData.append("name", data.fio);
         postData.append("code", String(confirmCode));
