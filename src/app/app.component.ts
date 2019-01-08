@@ -19,7 +19,6 @@ import {DatabaseProvider} from "../providers/database/database";
 import {CacheService} from "ionic-cache";
 import {AboutPage} from "../pages/about/about";
 import {MakeOrderPage} from "../pages/make-order/make-order";
-import {OneSignal} from "@ionic-native/onesignal";
 
 @Component({
   templateUrl: 'app.html'
@@ -31,10 +30,10 @@ export class MyApp {
   pages: Array<{ id: number, title: string, component: any, img: any }>;
   activePage: any;
 
-  constructor(public oneSignal: OneSignal, public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     this.cache.clearAll();
-    var notificationOpenedCallback = function(jsonData) {
+    /*var notificationOpenedCallback = function(jsonData) {
       console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
     };
 
@@ -50,7 +49,7 @@ export class MyApp {
       let ids = data;
       let push  = ids.userId;
       localStorage.setItem("push", push);
-    });
+    });*/
     if(localStorage.getItem("user_name")){
     }
     this.pages = [

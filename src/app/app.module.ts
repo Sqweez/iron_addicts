@@ -34,7 +34,6 @@ import {AboutPage} from "../pages/about/about";
 import {ModalDostavkaPage} from "../pages/modal-dostavka/modal-dostavka";
 import {MakeOrderPage} from "../pages/make-order/make-order";
 import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
-import {OneSignal} from "@ionic-native/onesignal";
 
 @NgModule({
   declarations: [
@@ -100,8 +99,7 @@ import {OneSignal} from "@ionic-native/onesignal";
     SQLitePorter,
     EmailComposer,
     CallNumber,
-    InAppBrowser,
-    OneSignal
+    InAppBrowser
   ]
 })
 export class AppModule {}

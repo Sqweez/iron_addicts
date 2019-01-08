@@ -93,6 +93,5 @@
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
-    <plugin name="onesignal-cordova-plugin" spec="^2.4.6" />
     <engine name="android" spec="7.0.0" />
 </widget>
