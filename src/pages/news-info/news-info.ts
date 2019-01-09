@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import * as $ from "jquery";
 import {c} from "@angular/core/src/render3";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CartPage} from "../cart/cart";
+import {Http} from "@angular/http";
 
 /**
  * Generated class for the NewsInfoPage page.
@@ -19,29 +20,37 @@ import {CartPage} from "../cart/cart";
 })
 export class NewsInfoPage {
   count;
-  item: any = {};
-  video: any;
-  constructor(public sanitazer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams) {
-    this.item = this.navParams.get("item");
-    this.video = this.sanitazer.bypassSecurityTrustHtml(this.item.video);
+  item: any;
+  video: any = '';
+  id;
+
+  constructor(public http: Http, public sanitazer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams) {
+    this.item  = this.navParams.get("item");
+    console.log(this.item);
+    if(this.item.video != ""){
+      this.video = this.sanitazer.bypassSecurityTrustHtml(this.item.video);
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsInfoPage');
   }
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     this.count = Number(localStorage.getItem("cart-item-count"));
     this.isVideoLoaded();
   }
-  addClass(){
+
+  addClass() {
     let element = $('.content');
     element.addClass("blurredContent");
   }
-  openCart(){
+
+  openCart() {
     this.navCtrl.push(CartPage);
   }
 
-  isVideoLoaded(){
+  isVideoLoaded() {
     let div = document.getElementById('video-container');
     let element = document.getElementsByTagName('iframe');
     let text = document.getElementById('loading');

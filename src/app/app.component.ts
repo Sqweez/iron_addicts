@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Events, Nav, Platform} from 'ionic-angular';
+import {App, Events, Nav, NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
@@ -19,6 +19,10 @@ import {DatabaseProvider} from "../providers/database/database";
 import {CacheService} from "ionic-cache";
 import {AboutPage} from "../pages/about/about";
 import {MakeOrderPage} from "../pages/make-order/make-order";
+import {OneSignal} from "@ionic-native/onesignal";
+import {Http} from "@angular/http";
+import {EmptyPage} from "../pages/empty/empty";
+import {NewsInfoPage} from "../pages/news-info/news-info";
 
 @Component({
   templateUrl: 'app.html'
@@ -29,12 +33,29 @@ export class MyApp {
   page: any;
   pages: Array<{ id: number, title: string, component: any, img: any }>;
   activePage: any;
+  request;
+  news: any;
+  item;
 
-  constructor(public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public app: App, public http: Http, public oneSignal: OneSignal, public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     this.cache.clearAll();
-    /*var notificationOpenedCallback = function(jsonData) {
-      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+
+    var notificationOpenedCallback = function (jsonData) {
+      let request = jsonData.notification.payload.additionalData;
+      console.log(request);
+      let type = request.type;
+      switch (type) {
+        case 'birthday':
+          app.getActiveNav().setRoot(EmptyPage, {data: request.data});
+          break;
+        case 'news':
+          let item = {name: request.name, text: request.text, img: request.img, video: request.video};
+          app.getActiveNav().setRoot(NewsInfoPage, {item: item});
+          break;
+        default:
+          break;
+      }
     };
 
     let OneSigna = window["plugins"].OneSignal;
@@ -47,10 +68,14 @@ export class MyApp {
       .endInit();
     this.oneSignal.getIds().then(data => {
       let ids = data;
-      let push  = ids.userId;
+      let push = ids.userId;
       localStorage.setItem("push", push);
-    });*/
-    if(localStorage.getItem("user_name")){
+    });
+    this.oneSignal.handleNotificationOpened().subscribe(data => {
+      this.request = data.notification.payload.additionalData.type;
+      console.log(this.request);
+    });
+    if (localStorage.getItem("user_name")) {
     }
     this.pages = [
       {id: 1, title: 'ГЛАВНАЯ', component: HomePage, img: 'home.png'},
@@ -59,7 +84,7 @@ export class MyApp {
       {id: 6, title: 'КОНТАКТЫ', component: ContactsPage, img: 'kontakt.png'},
       {id: 7, title: 'О РАЗРАБОТЧИКЕ', component: AboutPage, img: 'info.png'}
     ];
-    if(localStorage.getItem("balans")){
+    if (localStorage.getItem("balans")) {
       this.pages = [
         {id: 1, title: 'ГЛАВНАЯ', component: HomePage, img: 'home.png'},
         {id: 2, title: 'НОВОСТИ', component: NewsPage, img: 'news.png'},
@@ -85,6 +110,7 @@ export class MyApp {
     this.activePage = this.pages[0];
 
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {

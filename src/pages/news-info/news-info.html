@@ -17,20 +17,21 @@
 
 
 <ion-content>
-  <ng-container *ngIf="video == 0">
-    <img class="item-info-img" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
-  </ng-container>
-  <h3>{{item.name}}</h3>
-  <ng-container *ngIf="video != 0">
-    <div class="spinner" id="loading">
-      <div class="rect1"></div>
-      <div class="rect2"></div>
-      <div class="rect3"></div>
-      <div class="rect4"></div>
-      <div class="rect5"></div>
-    </div>
-    <div #frame [innerHtml]="video" id="video-container" style="text-align: center; display: none" class="iframeDiv"></div>
-  </ng-container>
-  <p class="item-info-description" style="    position: absolute;
+    <ng-container *ngIf="item.video == ''">
+      <img class="item-info-img" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+    </ng-container>
+    <h3>{{item.name}}</h3>
+    <ng-container *ngIf="item.video != ''">
+      <div class="spinner" id="loading">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
+      <div #frame [innerHtml]="video" id="video-container" style="text-align: center; display: none" class="iframeDiv"></div>
+    </ng-container>
+    <p class="item-info-description" style="    position: absolute;
     margin-top: 3%;">{{item.text}}</p>
+
 </ion-content>

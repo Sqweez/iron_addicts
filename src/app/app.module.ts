@@ -34,6 +34,10 @@ import {AboutPage} from "../pages/about/about";
 import {ModalDostavkaPage} from "../pages/modal-dostavka/modal-dostavka";
 import {MakeOrderPage} from "../pages/make-order/make-order";
 import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
+import {IonicImageViewerModule} from "ionic-img-viewer";
+import {OneSignal} from "@ionic-native/onesignal";
+import {EmptyPage} from "../pages/empty/empty";
+import {HeaderColor} from "@ionic-native/header-color";
 
 @NgModule({
   declarations: [
@@ -54,7 +58,8 @@ import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
     AboutPage,
     ModalDostavkaPage,
     MakeOrderPage,
-    ItemInfoCartPage
+    ItemInfoCartPage,
+    EmptyPage
   ],
   imports: [
     BrMaskerModule,
@@ -66,6 +71,7 @@ import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
       autoFocusAssist: true,
       scrollPadding: false
     }),
+    IonicImageViewerModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -87,7 +93,8 @@ import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
     AboutPage,
     ModalDostavkaPage,
     MakeOrderPage,
-    ItemInfoCartPage
+    ItemInfoCartPage,
+    EmptyPage
   ],
   providers: [
     StatusBar,
@@ -99,7 +106,9 @@ import {ItemInfoCartPage} from "../pages/item-info-cart/item-info-cart";
     SQLitePorter,
     EmailComposer,
     CallNumber,
-    InAppBrowser
+    InAppBrowser,
+    OneSignal,
+    HeaderColor
   ]
 })
 export class AppModule {}

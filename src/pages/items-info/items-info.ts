@@ -4,6 +4,7 @@ import {CartPage} from "../cart/cart";
 import swal from "sweetalert";
 import {DatabaseProvider} from "../../providers/database/database";
 import {Http} from "@angular/http";
+import {DomSanitizer} from "@angular/platform-browser";
 
 /**
  * Generated class for the ItemsInfoPage page.
@@ -24,9 +25,11 @@ export class ItemsInfoPage {
   product_vkus;
   vkus;
   product_count;
-
-  constructor(public http: Http, public database: DatabaseProvider, public navCtrl: NavController, public navParams: NavParams) {
+  description;
+  constructor(public sanitazer: DomSanitizer, public http: Http, public database: DatabaseProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.product = this.navParams.get("item");
+    this.description = this.product.product_desc;
+    this.description = sanitazer.bypassSecurityTrustHtml(this.description);
     console.log(this.product);
     this.getItem();
     /*this.database.checkIfAlreadyAdded(this.product.product_id).then(data => {

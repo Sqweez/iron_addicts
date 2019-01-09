@@ -23,8 +23,6 @@ export class NewsPage {
   constructor(public http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.getNews();
   }
-
-
   ionViewDidEnter(){
     this.count = Number(localStorage.getItem("cart-item-count"));
   }
@@ -45,6 +43,7 @@ export class NewsPage {
     this.http.get('http://iron.controlsoft.kz/mobile-app.php?action=getNews').subscribe(data => {
       this.requestData = data;
       this.requestData = JSON.parse(this.requestData._body);
+      console.log(this.requestData)
     })
   }
 

@@ -9,6 +9,8 @@ import {Observable} from "rxjs/Observable";
 import {DatabaseProvider} from "../../providers/database/database";
 import swal from "sweetalert";
 import {SplashScreen} from "@ionic-native/splash-screen";
+import {StatusBar} from "@ionic-native/status-bar";
+import {HeaderColor} from "@ionic-native/header-color";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -16,7 +18,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 export class HomePage {
   count;
   categories: Observable<any>;
-  constructor(public splashScreen: SplashScreen, public database: DatabaseProvider, public http: Http, public navCtrl: NavController) {
+  constructor(public headerColor: HeaderColor, public statusBar: StatusBar, public splashScreen: SplashScreen, public database: DatabaseProvider, public http: Http, public navCtrl: NavController) {
     $('#1').addClass('activeHighlight');
     $('#5').removeClass('activeHighlight');
     $('#1 > div > div > ion-label > img').removeClass('sideBarIcons');
@@ -30,6 +32,8 @@ export class HomePage {
     postData.append("action", "getCategories");
     let req = this.http.post(url, postData)
       .map(res => {
+        this.statusBar.backgroundColorByHexString('#2a2a2a');
+        this.headerColor.tint('#2a2a2a');
         this.splashScreen.hide();
         return res.json();
       });
