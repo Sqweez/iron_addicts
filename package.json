@@ -82,8 +82,8 @@
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-email-composer": {},
       "cordova-plugin-inappbrowser": {},
-      "onesignal-cordova-plugin": {},
-      "cordova-plugin-headercolor": {}
+      "cordova-plugin-headercolor": {},
+      "onesignal-cordova-plugin": {}
     },
     "platforms": [
       "android"

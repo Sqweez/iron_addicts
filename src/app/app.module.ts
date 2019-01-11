@@ -69,7 +69,8 @@ import {HeaderColor} from "@ionic-native/header-color";
     IonicModule.forRoot(MyApp, {
       scrollAssist: true,
       autoFocusAssist: true,
-      scrollPadding: false
+      scrollPadding: false,
+      backButtonText: 'Назад'
     }),
     IonicImageViewerModule,
     IonicStorageModule.forRoot()
@@ -107,8 +108,8 @@ import {HeaderColor} from "@ionic-native/header-color";
     EmailComposer,
     CallNumber,
     InAppBrowser,
-    OneSignal,
-    HeaderColor
+    HeaderColor,
+    OneSignal
   ]
 })
 export class AppModule {}

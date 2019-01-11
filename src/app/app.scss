@@ -183,7 +183,7 @@ and (max-device-width : 736px) {
     left: 2px;
   }
 }
-/* ДЛЯ IPHONE X*/
+/*!* ДЛЯ IPHONE X*!
 @media only screen
 and (min-device-width : 375px)
 and (max-device-width : 812px)
@@ -196,7 +196,7 @@ and (-webkit-device-pixel-ratio : 3) {
     -webkit-clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
     clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
   }
-}
+}*/
 /* ДЛЯ IPAD*/
 @media only screen
 and (min-device-width : 768px)
@@ -314,7 +314,7 @@ and (max-device-width : 1024px){
   font-size: 1.5rem;
 }
 .parallelogram {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 15%;
   -webkit-box-sizing: content-box;
@@ -339,7 +339,7 @@ and (max-device-width : 1024px){
   transform: skewX(20deg);
 }
 .buttonAdd {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     right: -5%;
     -webkit-box-sizing: content-box;
@@ -422,6 +422,7 @@ and (max-device-width : 1024px){
 }
 .contact-text {
   margin-right: 5%;
+  font-family: -apple-system, "Helvetica Neue", "Roboto", sans-serif;
 }
 .contact-item > img {
   margin-left: 2%;

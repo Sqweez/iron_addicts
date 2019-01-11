@@ -37,45 +37,56 @@ export class MyApp {
   news: any;
   item;
 
-  constructor(public app: App, public http: Http, public oneSignal: OneSignal, public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public oneSignal: OneSignal, public app: App, public http: Http, public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     this.cache.clearAll();
+    if(this.platform.is('cordova')){
+      var notificationOpenedCallback = function (jsonData) {
+        let request = jsonData.notification.payload.additionalData;
+        console.log(request);
+        let type = request.type;
+        switch (type) {
+          case 'birthday':
+            app.getActiveNav().setRoot(EmptyPage, {data: request.data});
+            break;
+          case 'news':
+            let item = {name: request.name, text: request.text, img: request.img, video: request.video};
+            app.getActiveNav().setRoot(NewsInfoPage, {item: item});
+            break;
+          default:
+            break;
+        }
+      };
 
-    var notificationOpenedCallback = function (jsonData) {
-      let request = jsonData.notification.payload.additionalData;
-      console.log(request);
-      let type = request.type;
-      switch (type) {
-        case 'birthday':
-          app.getActiveNav().setRoot(EmptyPage, {data: request.data});
-          break;
-        case 'news':
-          let item = {name: request.name, text: request.text, img: request.img, video: request.video};
-          app.getActiveNav().setRoot(NewsInfoPage, {item: item});
-          break;
-        default:
-          break;
-      }
-    };
+      let OneSigna = window["plugins"].OneSignal;
 
-    let OneSigna = window["plugins"].OneSignal;
+      OneSigna.inFocusDisplaying(OneSigna.OSInFocusDisplayOption.InAppAlert);
 
-    OneSigna.inFocusDisplaying(OneSigna.OSInFocusDisplayOption.InAppAlert);
+      window["plugins"].OneSignal
+        .startInit("2de9db68-ce1f-47c0-a8ce-f5ad7c70a87a", "369774151086")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+    }
 
-    window["plugins"].OneSignal
-      .startInit("bc0d48c5-b987-4e7e-bfd9-7a6e125090bf", "522039171006")
-      .handleNotificationOpened(notificationOpenedCallback)
-      .endInit();
     this.oneSignal.getIds().then(data => {
       let ids = data;
       let push = ids.userId;
+      console.log('push ' + push);
       localStorage.setItem("push", push);
     });
-    this.oneSignal.handleNotificationOpened().subscribe(data => {
-      this.request = data.notification.payload.additionalData.type;
-      console.log(this.request);
-    });
     if (localStorage.getItem("user_name")) {
+      let id = localStorage.getItem("user_id");
+      let url = "http://iron.controlsoft.kz/mobile-app.php?action=getPush&id=" + id;
+      this.http.get(url).subscribe(data => {
+        this.request = data;
+        this.request = this.request._body;
+        let push = this.request;
+        if(push == ""){
+          let newPush = localStorage.getItem("push");
+          let url = "http://iron.controlsoft.kz/mobile-app.php?action=setPush&id=" + id + "&push=" + newPush;
+          this.http.get(url).subscribe(() => {});
+        }
+      })
     }
     this.pages = [
       {id: 1, title: 'ГЛАВНАЯ', component: HomePage, img: 'home.png'},
