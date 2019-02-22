@@ -93,6 +93,7 @@ export class RegisterPage {
           localStorage.setItem("balans", userData[0].balance);
           localStorage.setItem("user_id", userData[0].user_id);
           localStorage.setItem("phone", data.phone);
+          localStorage.setItem("isTrener", userData[0].isTrener);
           this.menuCtrl.enable(true);
           this.events.publish('user:loggedin');
           this.navCtrl.setRoot(MyApp);

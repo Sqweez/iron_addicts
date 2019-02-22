@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import * as $ from "jquery";
 import {c} from "@angular/core/src/render3";
 import {DomSanitizer} from "@angular/platform-browser";
 import {CartPage} from "../cart/cart";
 import {Http} from "@angular/http";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the NewsInfoPage page.
@@ -23,8 +24,8 @@ export class NewsInfoPage {
   item: any;
   video: any = '';
   id;
-
-  constructor(public http: Http, public sanitazer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public pgtr: NativePageTransitions, public http: Http, public sanitazer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams) {
     this.item  = this.navParams.get("item");
     console.log(this.item);
     if(this.item.video != ""){
@@ -33,7 +34,17 @@ export class NewsInfoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewsInfoPage');
+    this.navBar.backButtonClick = (ev:UIEvent) => {
+      if(this.navCtrl.canGoBack()){
+        let options: NativeTransitionOptions = {
+          direction: 'right',
+          duration: 200,
+          slowdownfactor: -1
+        }
+        this.pgtr.slide(options);
+        this.navCtrl.pop();
+      }
+    }
   }
 
   ionViewDidEnter() {

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar color="asphalt">
+    <button ion-button menuToggle (click)="addClass()">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openCart()">
+        <img height="26px" src="../assets/imgs/Korzina1.png" alt="">
+      </button>
+      <div *ngIf="count!=0" class="itemOfCarts">
+        <div>{{count}}</div>
+      </div>
+    </ion-buttons>
+    <ion-title>IRON ADDICTS</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <h3>Покупки</h3>
+  <div style="display: inline-block; float: right; padding-right: 5%; padding-bottom: 5%;">
+    <span>Общая сумма: <span class="red">{{total_price}} тенге</span></span><br>
+    <span>Покупатель: <span class="red">{{client?.client_name}}</span></span><br>
+    <span>Ваш кэшбек: <span class="red">{{cashback}} тенге</span></span>
+  </div>
+  <ion-list class="categories" no-lines>
+    <ion-item class="itemsList" *ngFor="let item of goods" no-padding (click)="pushToPage(item)">
+      <div style="height: 100%;">
+        <img class="item-small-img" style="max-height: 80px;" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+        <div class="itemName" style="width: 60%;">{{item.product_name}}
+        </div>
+        <div style="font-size: 1.5rem;
+      position: absolute;
+      bottom: 29%;
+      left: 39%;">Количество:<span style="color: #ff0000; margin-left: 4px;">{{item.count}}</span></div>
+        <div class="price" style="right: 10%;"><span class="red">{{item.count}}</span> <span style="font-family: Arial;">X</span>
+          <span class="red">{{item.fact_price}}</span> тенге
+        </div>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

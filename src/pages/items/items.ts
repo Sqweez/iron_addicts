@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, ModalController, Navbar, NavController, NavParams} from 'ionic-angular';
 import {CartPage} from "../cart/cart";
 import {ItemsInfoPage} from "../items-info/items-info";
 import {Http} from "@angular/http";
@@ -9,6 +9,7 @@ import swal from 'sweetalert';
 import * as $ from "jquery";
 import {CacheService} from "ionic-cache";
 import {ModalPage} from "../modal/modal";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the ItemsPage page.
@@ -30,7 +31,8 @@ export class ItemsPage {
   itemKey;
   key;
   name;
-  constructor(public modal: ModalController, public cache: CacheService, public database: DatabaseProvider, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild(Navbar) navBar: Navbar
+  constructor(public pgtr: NativePageTransitions, public modal: ModalController, public cache: CacheService, public database: DatabaseProvider, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
     let data = this.navParams.get("data");
     this.id = data[0];
     this.name = data[1];
@@ -40,70 +42,88 @@ export class ItemsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ItemsPage');
+    this.navBar.backButtonClick = (ev:UIEvent) => {
+      if(this.navCtrl.canGoBack()){
+        let options: NativeTransitionOptions = {
+          direction: 'right',
+          duration: 200,
+          slowdownfactor: -1
+        }
+        this.pgtr.slide(options);
+        this.navCtrl.pop();
+      }
+    }
   }
 
-  getProducts(){
+  getProducts() {
     let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodsList&sub=" + this.id;
     let req = this.http.get(url)
       .map(res => {
-        console.log(res)
         return res.json();
       });
     this.products = this.cache.loadFromObservable(this.key, req, this.itemKey);
 
   }
 
-  openCart(){
+  openCart() {
     this.navCtrl.push(CartPage);
   }
-  ionViewDidEnter(){
+
+  ionViewDidEnter() {
     this.count = Number(localStorage.getItem("cart-item-count"));
   }
- /* getItem(item, request) {
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name;
-    console.log(url);
-    return this.http.get(url).subscribe(data => {
-      request = data;
-      request = request._body;
-      request = JSON.parse(request);
-      return request;
-    });
-  }*/
-  addToCart(item){
-    if(item.count > 0){
-      var data = {message: item};
-      console.log(data);
-      var modalPage = this.modal.create(ModalPage, data);
-      modalPage.onDidDismiss(data => {
-        this.database.getDatabaseState().subscribe(rdy => {
-          if (rdy) {
-            let today = new Date();
-            let day = today.getDate();
-            let month = today.getMonth() + 1;
-            let year = today.getFullYear();
-            let date = day + "." + month + "." + year;
-            item.product_id = data.id;
-            item.product_vkus = data.vkus;
-            item.sklad_count = 0;
-            this.database.addToCart(data.id, item, date).then(() => {
-              swal("", "Товар добавлен в корзину", "success");
-              localStorage.setItem("cart-item-count", String(this.count + 1));
-              this.count++;
-            });
-          }
+
+  addToDb(item, data){
+    this.database.getDatabaseState().subscribe(rdy => {
+      if (rdy) {
+        let today = new Date();
+        let day = today.getDate();
+        let month = today.getMonth() + 1;
+        let year = today.getFullYear();
+        let date = day + "." + month + "." + year;
+        item.product_id = data.id;
+        item.product_vkus = data.vkus;
+        item.sklad_count = 0;
+        this.database.addToCart(data.id, item, date).then(() => {
+          swal("", "Товар добавлен в корзину", "success");
+          localStorage.setItem("cart-item-count", String(this.count + 1));
+          this.count++;
         });
+      }
+    });
+  }
+
+  async addToCart(item) {
+    if (item.count > 0) {
+      let product;
+      let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name + "&price=" + item.product_price + "&massa=" + item.massa;
+      this.http.get(url).subscribe(data => {
+        this.request = data;
+        this.request = this.request._body;
+        this.request = JSON.parse(this.request);
+        let items = this.request;
+        if (!(items[0].product_vkus == "-" || items.length == 1)) {
+          let data = {message: item};
+          let modalPage = this.modal.create(ModalPage, data);
+          modalPage.onDidDismiss(data => {
+            this.addToDb(item, data);
+          });
+          modalPage.present();
+        }
+        else{
+          let data = {id: item.product_id, vkus: item.vkus, sklad_count: 0};
+          this.addToDb(item, data);
+        }
       });
-      modalPage.present();
-      console.log(item);
+
     }
-    else{
+    else {
       swal("Извините!", "Товар закончился", "warning");
     }
 
   }
 
-  pushToPage(item){
-    this.navCtrl.push(ItemsInfoPage,{item: item});
+  pushToPage(item) {
+    this.navCtrl.push(ItemsInfoPage, {item: item});
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {DatabaseProvider} from "../../providers/database/database";
 import swal from "sweetalert";
@@ -22,11 +22,14 @@ export class ModalPage {
   item;
   request;
   items;
-  constructor(public http: Http,public database: DatabaseProvider, public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
+  isEmptyTaste: boolean = false;
+
+  constructor(public http: Http, public database: DatabaseProvider, public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
     this.item = this.navParams.get("message");
     this.getItem(this.item);
   }
-  dismiss(){
+
+  dismiss() {
     this.viewCtrl.dismiss();
   }
 
@@ -36,24 +39,27 @@ export class ModalPage {
 
   getItem(item) {
     let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name + "&price=" + item.product_price + "&massa=" + item.massa;
-    console.log(url);
     return this.http.get(url).subscribe(data => {
       this.request = data;
       this.request = this.request._body;
       this.request = JSON.parse(this.request);
       this.items = this.request;
+      if (this.items[0].product_vkus == "-" && this.items.length == 1) {
+        return this.isEmptyTaste = true;
+      }
+      this.vkus = this.items[0].product_id;
     });
   }
 
-  addToCart(){
-    if(!this.vkus){
+  addToCart() {
+    if (!this.vkus) {
       swal("", "Выберите вкус", "error");
     }
-    else{
+    else {
       let product_id = this.vkus;
       let vkus_name = 0;
       this.items.forEach(function (item) {
-        if(item["product_id"] == product_id){
+        if (item["product_id"] == product_id) {
           vkus_name = item["product_vkus"];
         }
       });

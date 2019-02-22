@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {App, Events, Nav, NavController, Platform} from 'ionic-angular';
+import {AlertController, App, Events, Nav, NavController, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
@@ -23,6 +23,8 @@ import {OneSignal} from "@ionic-native/onesignal";
 import {Http} from "@angular/http";
 import {EmptyPage} from "../pages/empty/empty";
 import {NewsInfoPage} from "../pages/news-info/news-info";
+import {TrainerPage} from "../pages/trainer/trainer";
+import swal from "sweetalert";
 
 @Component({
   templateUrl: 'app.html'
@@ -37,10 +39,10 @@ export class MyApp {
   news: any;
   item;
 
-  constructor(public oneSignal: OneSignal, public app: App, public http: Http, public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public alertCtrl: AlertController, public pgtr: NativePageTransitions, public oneSignal: OneSignal, public app: App, public http: Http, public cache: CacheService, public events: Events, public nativePageTransitions: NativePageTransitions, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
     this.cache.clearAll();
-    if(this.platform.is('cordova')){
+    if (this.platform.is('cordova')) {
       var notificationOpenedCallback = function (jsonData) {
         let request = jsonData.notification.payload.additionalData;
         console.log(request);
@@ -74,6 +76,14 @@ export class MyApp {
       console.log('push ' + push);
       localStorage.setItem("push", push);
     });
+
+    let trainer = {
+      id: 8,
+      title: 'ТРЕНЕР',
+      component: TrainerPage,
+      img: 'trainer.png'
+    };
+
     if (localStorage.getItem("user_name")) {
       let id = localStorage.getItem("user_id");
       let url = "http://iron.controlsoft.kz/mobile-app.php?action=getPush&id=" + id;
@@ -81,10 +91,11 @@ export class MyApp {
         this.request = data;
         this.request = this.request._body;
         let push = this.request;
-        if(push == ""){
+        if (push == "") {
           let newPush = localStorage.getItem("push");
           let url = "http://iron.controlsoft.kz/mobile-app.php?action=setPush&id=" + id + "&push=" + newPush;
-          this.http.get(url).subscribe(() => {});
+          this.http.get(url).subscribe(() => {
+          });
         }
       })
     }
@@ -106,7 +117,13 @@ export class MyApp {
         {id: 7, title: 'О РАЗРАБОТЧИКЕ', component: AboutPage, img: 'info.png'}
       ];
     }
+    let isTrener = parseInt(localStorage.getItem("isTrener"));
+    if (isTrener == 1) {
+      this.pages.push(trainer)
+    }
+
     events.subscribe('user:loggedin', () => {
+      let isTrener = parseInt(localStorage.getItem("isTrener"));
       this.pages = [
         {id: 1, title: 'ГЛАВНАЯ', component: HomePage, img: 'home.png'},
         {id: 2, title: 'НОВОСТИ', component: NewsPage, img: 'news.png'},
@@ -116,6 +133,9 @@ export class MyApp {
         {id: 6, title: 'КОНТАКТЫ', component: ContactsPage, img: 'kontakt.png'},
         {id: 7, title: 'О РАЗРАБОТЧИКЕ', component: AboutPage, img: 'info.png'}
       ];
+      if (isTrener == 1) {
+        this.pages.push(trainer)
+      }
       this.activePage = this.pages[0];
     });
     this.activePage = this.pages[0];
@@ -128,6 +148,39 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
+
+      this.platform.registerBackButtonAction(() => {
+        if(this.nav.canGoBack()){
+          let options: NativeTransitionOptions = {
+            direction: 'right',
+            duration: 250,
+            slowdownfactor: -1
+          }
+          this.pgtr.slide(options);
+          this.nav.pop();
+        }
+        else{
+          let activePage = this.nav.getActive().name;
+          if(activePage == "HomePage"){
+            swal({
+              title: "Закрытие приложение",
+              text: "Вы хотите закрыть приложение?",
+              buttons: ["Отмена", "Закрыть"],
+              icon: "warning"
+            }).then(res => {
+              if(res){
+                this.platform.exitApp();
+              }
+            })
+          }
+          else{
+            let el = $('.activeHighlight');
+            el.removeClass('activeHighlight');
+            el.find('img').addClass('sideBarIcons');
+            this.nav.setRoot(HomePage);
+          }
+        }
+      });
     });
   }
 
@@ -139,6 +192,7 @@ export class MyApp {
   removeClass() {
     let element = $('.content');
     element.removeClass("blurredContent");
+    $('.footer').removeClass("blurredContent");
   }
 
   openPage(page) {

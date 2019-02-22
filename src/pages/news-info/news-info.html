@@ -32,6 +32,6 @@
       <div #frame [innerHtml]="video" id="video-container" style="text-align: center; display: none" class="iframeDiv"></div>
     </ng-container>
     <p class="item-info-description" style="    position: absolute;
-    margin-top: 3%;">{{item.text}}</p>
+    margin-top: 3%;" [innerHtml]="item.text"></p>
 
 </ion-content>

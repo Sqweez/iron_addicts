@@ -153,6 +153,7 @@ export class CartPage {
   addClass() {
     let element = $('.content');
     element.addClass("blurredContent");
+    $('.footer').addClass("blurredContent");
   }
 
   buy() {

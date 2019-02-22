@@ -38,6 +38,9 @@ import {IonicImageViewerModule} from "ionic-img-viewer";
 import {OneSignal} from "@ionic-native/onesignal";
 import {EmptyPage} from "../pages/empty/empty";
 import {HeaderColor} from "@ionic-native/header-color";
+import {TrainerPage} from "../pages/trainer/trainer";
+import {ModalPromocodePage} from "../pages/modal-promocode/modal-promocode";
+import {PromocodeInfoPage} from "../pages/promocode-info/promocode-info";
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import {HeaderColor} from "@ionic-native/header-color";
     ModalDostavkaPage,
     MakeOrderPage,
     ItemInfoCartPage,
-    EmptyPage
+    EmptyPage,
+    TrainerPage,
+    ModalPromocodePage,
+    PromocodeInfoPage
   ],
   imports: [
     BrMaskerModule,
@@ -95,7 +101,10 @@ import {HeaderColor} from "@ionic-native/header-color";
     ModalDostavkaPage,
     MakeOrderPage,
     ItemInfoCartPage,
-    EmptyPage
+    EmptyPage,
+    TrainerPage,
+    ModalPromocodePage,
+    PromocodeInfoPage
   ],
   providers: [
     StatusBar,

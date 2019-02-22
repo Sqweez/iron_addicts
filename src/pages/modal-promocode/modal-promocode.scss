@@ -1,0 +1,25 @@
+.digit {
+  -webkit-animation-name: odometr; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: odometr;
+  color: #191919;
+}
+
+@-webkit-keyframes odometr {
+  from {
+    -webkit-transform: translateY(-1.5em);
+  }
+
+  to {
+    -webkit-transform: translateY(0);
+  }
+}
+@keyframes odometr {
+  from {
+    transform: translateY(-1.5em);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

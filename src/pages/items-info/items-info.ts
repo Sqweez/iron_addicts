@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {CartPage} from "../cart/cart";
 import swal from "sweetalert";
 import {DatabaseProvider} from "../../providers/database/database";
 import {Http} from "@angular/http";
 import {DomSanitizer} from "@angular/platform-browser";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 
 /**
  * Generated class for the ItemsInfoPage page.
@@ -26,25 +27,28 @@ export class ItemsInfoPage {
   vkus;
   product_count;
   description;
-  constructor(public sanitazer: DomSanitizer, public http: Http, public database: DatabaseProvider, public navCtrl: NavController, public navParams: NavParams) {
+  isEmptyTaste: boolean = false;
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public pgtr: NativePageTransitions, public sanitazer: DomSanitizer, public http: Http, public database: DatabaseProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.product = this.navParams.get("item");
     this.description = this.product.product_desc;
     this.description = sanitazer.bypassSecurityTrustHtml(this.description);
     console.log(this.product);
     this.getItem();
-    /*this.database.checkIfAlreadyAdded(this.product.product_id).then(data => {
-      if(this.isEmpty(data)) {
-        this.isAdded = false;
-      }
-      else {
-        this.isAdded = true;
-      }
-      console.log(this.isAdded);
-    })*/
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ItemsInfoPage');
+    this.navBar.backButtonClick = (ev:UIEvent) => {
+      if(this.navCtrl.canGoBack()){
+        let options: NativeTransitionOptions = {
+          direction: 'right',
+          duration: 200,
+          slowdownfactor: -1
+        }
+        this.pgtr.slide(options);
+        this.navCtrl.pop();
+      }
+    }
   }
 
   openCart() {
@@ -58,6 +62,11 @@ export class ItemsInfoPage {
       this.product_vkus = data;
       this.product_vkus = this.product_vkus._body;
       this.product_vkus = JSON.parse(this.product_vkus);
+      console.log(this.product_vkus);
+      if(this.product_vkus[0].product_vkus == "-" && this.product_vkus.length == 1){
+        this.isEmptyTaste = true;
+      }
+      this.vkus = this.product_vkus[0].product_id;
     })
   }
 

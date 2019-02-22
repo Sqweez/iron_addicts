@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, Navbar, NavController, NavParams} from 'ionic-angular';
 import {ItemsPage} from "../items/items";
 import {CartPage} from "../cart/cart";
 import * as $ from "jquery";
 import {Http} from "@angular/http";
 import {CacheService} from "ionic-cache";
+import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/native-page-transitions";
 /**
  * Generated class for the SubcategoriesPage page.
  *
@@ -17,6 +18,7 @@ import {CacheService} from "ionic-cache";
   selector: 'page-subcategories',
   templateUrl: 'subcategories.html',
 })
+
 export class SubcategoriesPage {
   count;
   data;
@@ -25,7 +27,8 @@ export class SubcategoriesPage {
   key;
   id;
   name;
-  constructor(private cache: CacheService, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild(Navbar) navBar: Navbar;
+  constructor(public pgtr: NativePageTransitions, private cache: CacheService, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.data = navParams.get("data");
     this.id = this.data[0];
     this.name = this.data[1];
@@ -35,7 +38,17 @@ export class SubcategoriesPage {
     this.getSubCategories(this.id);
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SubcategoriesPage');
+    this.navBar.backButtonClick = (ev:UIEvent) => {
+      if(this.navCtrl.canGoBack()){
+        let options: NativeTransitionOptions = {
+          direction: 'right',
+          duration: 200,
+          slowdownfactor: -1
+        }
+        this.pgtr.slide(options);
+        this.navCtrl.pop();
+      }
+    }
   }
   ionViewDidEnter(){
     this.count = Number(localStorage.getItem("cart-item-count"));

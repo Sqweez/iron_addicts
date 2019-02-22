@@ -571,7 +571,22 @@ and (orientation : portrait) {
 @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
   font-size: 1.3rem;
 }
-
-
+.digit-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 15% 0;
+}
+.card-digit {
+  height: 80px;
+  width: 58px;
+  background: #fff;
+}
+.digit {
+  text-align: center;
+  font-size: 7rem;
+}
+.red {
+  color: #ff0000;
+}
 
 

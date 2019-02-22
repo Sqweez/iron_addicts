@@ -1,0 +1,51 @@
+<div style="width: 100%; height: 25%;" (click)="dismiss()">
+
+</div>
+<ion-content style="position: absolute;
+    top: calc(50% - (50%/2));
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 50%;
+    padding: 10px;
+    z-index: 100;
+    margin: 0 auto;
+    padding: 10px;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 2px 3px rgba(51, 51, 51, .35);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;">
+  <div (click)="dismiss()"
+       style="height: 35px; width: 35px; display: inline-block; float: right; color: #fff; text-align: center;">
+    <div style="    font-size: 4rem;
+    font-weight: bold;
+    margin-top: -5px;">&times;
+    </div>
+  </div>
+  <div class="promocode-container" style="display: block;    margin-top: 11%;
+    height: 77%; width: 100%;">
+    <h4 style="    font-size: 3rem;
+    text-align: center;
+    color: #ff0000;">Промокод</h4>
+    <div class="digit-container">
+      <div class="card-digit"><div class="digit"></div></div>
+      <div class="card-digit"><div class="digit"></div></div>
+      <div class="card-digit"><div class="digit"></div></div>
+      <div class="card-digit"><div class="digit"></div></div>
+      <div class="card-digit"><div class="digit"></div></div>
+      <div class="card-digit"><div class="digit"></div></div>
+    </div>
+
+  </div>
+  <div class="gradient" style="height: 13%;" (click)="acceptPromocode()">
+    <div style="color: white;
+    text-align: center;
+    font-size: 3rem;
+    padding: 1%;">OK
+    </div>
+  </div>
+</ion-content>
+<div style="width: 100%; height: 25%; position: absolute; top: 75%;" (click)="dismiss()"></div>
