@@ -14,7 +14,6 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-news-info',
   templateUrl: 'news-info.html',

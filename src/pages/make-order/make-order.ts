@@ -13,7 +13,6 @@ import {CacheService} from "ionic-cache";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-make-order',
   templateUrl: 'make-order.html',

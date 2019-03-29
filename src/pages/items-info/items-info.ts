@@ -14,7 +14,6 @@ import {NativePageTransitions, NativeTransitionOptions} from "@ionic-native/nati
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-items-info',
   templateUrl: 'items-info.html',

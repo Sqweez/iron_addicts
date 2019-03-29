@@ -15,7 +15,6 @@ import {MakeOrderPage} from "../make-order/make-order";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',

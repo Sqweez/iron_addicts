@@ -12,7 +12,6 @@ import {ItemsInfoPage} from "../items-info/items-info";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-shop-history',
   templateUrl: 'shop-history.html',

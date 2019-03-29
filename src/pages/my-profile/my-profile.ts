@@ -4,7 +4,6 @@ import {CartPage} from "../cart/cart";
 import * as $ from "jquery";
 import {Http} from "@angular/http";
 
-@IonicPage()
 @Component({
   selector: 'page-my-profile',
   templateUrl: 'my-profile.html',

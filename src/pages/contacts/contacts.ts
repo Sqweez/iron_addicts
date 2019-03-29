@@ -16,7 +16,6 @@ import {InAppBrowser, InAppBrowserOptions} from "@ionic-native/in-app-browser";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-contacts',
   templateUrl: 'contacts.html',

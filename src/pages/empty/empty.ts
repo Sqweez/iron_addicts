@@ -9,7 +9,6 @@ import {CartPage} from "../cart/cart";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-empty',
   templateUrl: 'empty.html',

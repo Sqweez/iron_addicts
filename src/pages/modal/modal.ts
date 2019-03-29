@@ -11,7 +11,7 @@ import {Http} from "@angular/http";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+
 @Component({
   selector: 'page-modal',
   templateUrl: 'modal.html',
