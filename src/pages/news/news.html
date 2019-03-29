@@ -20,7 +20,7 @@
   <h3>Новости</h3>
   <ion-list class="categories" no-lines>
     <ion-item class="item-news" *ngFor="let item of requestData" no-padding (click)="pushToPage(item)">
-        <img class="news-small-img" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+        <img class="news-small-img" [src]="item.img" alt="">
       <div class="new-title">{{item.name}}</div>
       <div class="date">{{item.date}}</div>
     </ion-item>

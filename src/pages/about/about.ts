@@ -36,7 +36,7 @@ export class AboutPage {
   }
 
   getDevInfo(){
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getDevInfo";
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getDevInfo";
     this.http.get(url).subscribe(res => {
       this.data = res;
       this.data = this.data._body;

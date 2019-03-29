@@ -28,7 +28,7 @@ export class HomePage {
   }
 
   getCategories(){
-    let url = "http://iron.controlsoft.kz/mobile-app.php";
+    let url = "http://ironaddicts.kz/admin/mobile-app.php";
     let postData = new FormData();
     postData.append("action", "getCategories");
     let req = this.http.post(url, postData)

@@ -108,7 +108,7 @@ export class DatabaseProvider {
       if (res.rows.length > 0) {
         for (let i = 0; i < res.rows.length; i++) {
           let id = res.rows.item(i).id;
-          let url = "http://iron.controlsoft.kz/mobile-app.php?action=getSkladCount&id=" + id;
+          let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getSkladCount&id=" + id;
           this.http.get(url).subscribe(data => {
             this.request = data;
             this.request = JSON.parse(this.request._body);

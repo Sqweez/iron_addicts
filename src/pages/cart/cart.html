@@ -19,10 +19,11 @@
   <h3 style="font-size: large">Корзина</h3>
 
   <ion-list class="categories" no-lines>
-  <div style="height: 24%; margin-bottom: 4%;" *ngFor="let item of carts">
+    <div style="height: 24%; margin-bottom: 4%;" *ngFor="let item of carts">
       <ion-item class="cart-item" no-padding (click)="pushToPage(item.id)">
-        <img class="news-small-img" [src]="'http://iron.controlsoft.kz/' + item.product_img" alt="">
-        <div class="shop-history-title" style="margin-right: 3%">{{item.product_name}} | {{item.massa}} | {{item.product_vkus}}
+        <img class="news-small-img" [src]="item.product_img" alt="">
+        <div class="shop-history-title" style="margin-right: 3%">{{item.product_name}} | {{item.massa}} |
+          {{item.product_vkus}}
         </div>
         <div class="price">{{item.product_price}} тенге</div>
         <div class="date">{{item.date}}</div>
@@ -38,9 +39,12 @@
     height: 45%;" src="../../assets/imgs/trash.png" alt="" (click)="deleteItem(item.id, item.count)">
         </div>
         <div style="height: 100%; width: 25%; background-color: black; float: right; margin-left: 1%;">
-          <div style="text-align: center; line-height: 255%; color: #ff0000;">{{getCost(item.product_price, item.count)}} тнг</div>
+          <div style="text-align: center; line-height: 255%; color: #ff0000;">{{getCost(item.product_price,
+            item.count)}} тнг
+          </div>
         </div>
-        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="updateProductCount(item.id, item.count, '+', item.sklad_count);$event.stopPropagation();">
+        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;"
+             (click)="updateProductCount(item.id, item.count, '+', item.sklad_count);$event.stopPropagation();">
           <div style="text-align: center; line-height: 170%;font-size: 2.3rem; font-family: Arial;">+</div>
         </div>
         <div style="height: 100%; width: 12%; background-color: black; float: right; margin-left: 1%;">
@@ -48,7 +52,8 @@
             {{getCount(item.count)}}
           </div>
         </div>
-        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;" (click)="updateProductCount(item.id, item.count, '-', item.sklad_count);$event.stopPropagation();">
+        <div class="gradient" style="height: 100%; width: 13.5%; float: right; margin-left: 1%;"
+             (click)="updateProductCount(item.id, item.count, '-', item.sklad_count);$event.stopPropagation();">
           <div style="text-align: center; line-height: 170%;font-size: 2.3rem;font-family: Arial;">-</div>
         </div>
       </div>
@@ -72,8 +77,9 @@
     font-family: MainFont;
     color: white;
     float: right;">
-      Итого: <span style="color: #ff0000; font-weight: bold;">{{getTotalPrice()}} тнг</span>
+      <span id="disc_text">Итого:</span> <span style="color: #ff0000; font-weight: bold;">{{getTotalPrice(true)}} тнг</span>
     </div>
+
   </div>
   <div class="gradient" style="height: 50%; width: 100%; display:block;" (click)="buy()">
     <div style="color: white; display:block; text-align: center; line-height: 280%;">перейти к оформлению</div>

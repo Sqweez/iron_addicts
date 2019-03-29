@@ -20,7 +20,7 @@ export class PromocodeInfoPage {
 
   constructor(public pgtr: NativePageTransitions, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.id = this.navParams.get("item").id;
-    let url = `http://iron.controlsoft.kz/mobile-app.php?action=getPromocodeInfo&id=${this.id}`;
+    let url = `http://ironaddicts.kz/admin/mobile-app.php?action=getPromocodeInfo&id=${this.id}`;
     this.http.get(url).subscribe(data => {
       this.item = data;
       this.item = this.item._body;

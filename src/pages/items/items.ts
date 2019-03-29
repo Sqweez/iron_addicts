@@ -56,7 +56,7 @@ export class ItemsPage {
   }
 
   getProducts() {
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodsList&sub=" + this.id;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getGoodsList&sub=" + this.id;
     let req = this.http.get(url)
       .map(res => {
         return res.json();
@@ -96,7 +96,7 @@ export class ItemsPage {
   async addToCart(item) {
     if (item.count > 0) {
       let product;
-      let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name + "&price=" + item.product_price + "&massa=" + item.massa;
+      let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name + "&price=" + item.product_price + "&massa=" + item.massa;
       this.http.get(url).subscribe(data => {
         this.request = data;
         this.request = this.request._body;

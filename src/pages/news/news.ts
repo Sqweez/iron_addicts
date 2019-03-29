@@ -40,7 +40,7 @@ export class NewsPage {
     element.addClass("blurredContent");
   }
   getNews(){
-    this.http.get('http://iron.controlsoft.kz/mobile-app.php?action=getNews').subscribe(data => {
+    this.http.get('http://ironaddicts.kz/admin/mobile-app.php?action=getNews').subscribe(data => {
       this.requestData = data;
       this.requestData = JSON.parse(this.requestData._body);
       console.log(this.requestData)

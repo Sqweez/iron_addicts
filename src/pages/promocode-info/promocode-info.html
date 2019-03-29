@@ -26,7 +26,7 @@
   <ion-list class="categories" no-lines>
     <ion-item class="itemsList" *ngFor="let item of goods" no-padding (click)="pushToPage(item)">
       <div style="height: 100%;">
-        <img class="item-small-img" style="max-height: 80px;" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+        <img class="item-small-img" style="max-height: 80px;" [src]="item.img" alt="">
         <div class="itemName" style="width: 60%;">{{item.product_name}}
         </div>
         <div style="font-size: 1.5rem;

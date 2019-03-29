@@ -24,7 +24,7 @@ export class MyProfilePage {
 
   getBalance(){
     let user_id = Number(localStorage.getItem("user_id"));
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getBalance&user_id=" + user_id;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getBalance&user_id=" + user_id;
     this.http.get(url).subscribe(data => {
       this.response = data;
       this.response = JSON.parse(this.response._body);
@@ -35,7 +35,7 @@ export class MyProfilePage {
 
   getShopHistory(){
     let user_id = Number(localStorage.getItem("user_id"));
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getShopHistory&user_id=" + user_id;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getShopHistory&user_id=" + user_id;
     this.http.get(url).subscribe(res => {
       this.data = res;
       this.data = this.data._body;

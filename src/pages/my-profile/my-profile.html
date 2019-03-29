@@ -14,8 +14,6 @@
     <ion-title>IRON ADDICTS</ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content>
   <h3 style="font-size: large">мой профиль</h3>
   <div class="contact-item">
@@ -30,37 +28,4 @@
     <div class="contact-text" style="float: left; margin-left: 2%;">Баланс</div>
     <div class="contact-text">{{user_balance}} тнг</div>
   </div>
-  <h3 style="font-size: large">История покупок</h3>
-  <ion-list class="categories" no-lines>
-    <ion-item class="itemsList" *ngFor="let item of data" no-padding (click)="pushToPage(item)">
-      <div style="height: 100%;">
-        <img class="item-small-img" style="max-height: 80px;" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
-        <div class="itemName" style="width: 60%;">{{item.product_name}}
-          <div style="margin-top: 20%;">{{item.price}} тенге</div>
-        </div>
-        <div class="date">{{item.date}}</div>
-      </div>
-    </ion-item>
-  </ion-list>
-
-<!--  <ion-list class="categories" no-lines *ngFor="let item of data">
-    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
-      <img class="news-small-img" [src]="'http://iron.controlsoft.kz/' + item.img"  alt="">
-      <div class="shop-history-title">{{item.product_name}}</div>
-      <div class="cost">{{item.price}} тенге</div>
-      <div class="date">{{item.date}}</div>
-    </ion-item>-->
-<!--    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
-      <img class="news-small-img" src="../../assets/imgs/mel.jpg" alt="">
-      <div class="shop-history-title">BCAA PRO Effect premium</div>
-      <div class="cost">99999 тенге</div>
-      <div class="date">25.04.1996</div>
-    </ion-item>
-    <ion-item class="shop-history-item" no-padding (click)="pushToPage()">
-      <img class="news-small-img" src="../../assets/imgs/images.jpg" alt="">
-      <div class="shop-history-title">BCAA PRO Effect premium</div>
-      <div class="cost">99999 тенге</div>
-      <div class="date">25.04.1996</div>
-    </ion-item>-->
- <!-- </ion-list>-->
 </ion-content>

@@ -18,7 +18,7 @@
 
 <ion-content>
     <ng-container *ngIf="item.video == ''">
-      <img class="item-info-img" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+      <img class="item-info-img" [src]="item.img" alt="">
     </ng-container>
     <h3>{{item.name}}</h3>
     <ng-container *ngIf="item.video != ''">

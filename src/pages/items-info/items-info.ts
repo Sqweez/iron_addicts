@@ -29,6 +29,7 @@ export class ItemsInfoPage {
   description;
   isEmptyTaste: boolean = false;
   @ViewChild(Navbar) navBar: Navbar;
+
   constructor(public pgtr: NativePageTransitions, public sanitazer: DomSanitizer, public http: Http, public database: DatabaseProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.product = this.navParams.get("item");
     this.description = this.product.product_desc;
@@ -38,13 +39,13 @@ export class ItemsInfoPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick = (ev:UIEvent) => {
-      if(this.navCtrl.canGoBack()){
+    this.navBar.backButtonClick = (ev: UIEvent) => {
+      if (this.navCtrl.canGoBack()) {
         let options: NativeTransitionOptions = {
           direction: 'right',
           duration: 200,
           slowdownfactor: -1
-        }
+        };
         this.pgtr.slide(options);
         this.navCtrl.pop();
       }
@@ -56,14 +57,14 @@ export class ItemsInfoPage {
   }
 
   getItem() {
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodInfo&sub_id=" + this.product.podcategory_id + "&product_name=" + this.product.product_name + "&price=" + this.product.product_price + "&massa=" + this.product.massa;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getGoodInfo&sub_id=" + this.product.podcategory_id + "&product_name=" + this.product.product_name + "&price=" + this.product.product_price + "&massa=" + this.product.massa;
     console.log(url);
     this.http.get(url).subscribe(data => {
       this.product_vkus = data;
       this.product_vkus = this.product_vkus._body;
       this.product_vkus = JSON.parse(this.product_vkus);
       console.log(this.product_vkus);
-      if(this.product_vkus[0].product_vkus == "-" && this.product_vkus.length == 1){
+      if (this.product_vkus[0].product_vkus == "-" && this.product_vkus.length == 1) {
         this.isEmptyTaste = true;
       }
       this.vkus = this.product_vkus[0].product_id;
@@ -71,7 +72,7 @@ export class ItemsInfoPage {
   }
 
   addToCart(item) {
-    if(item.count > 0){
+    if (item.count > 0) {
       if (!this.vkus) {
         swal("", "Выберите вкус", "error");
       }
@@ -79,7 +80,7 @@ export class ItemsInfoPage {
         let product_id = this.vkus;
         let vkus_name = 0;
         this.product_vkus.forEach(function (item) {
-          if(item["product_id"] == product_id){
+          if (item["product_id"] == product_id) {
             vkus_name = item["product_vkus"];
           }
         });
@@ -102,7 +103,7 @@ export class ItemsInfoPage {
         });
       }
     }
-    else{
+    else {
       swal("Извините! Товар закончился");
     }
 

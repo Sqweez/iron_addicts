@@ -61,7 +61,7 @@ export class ContactsPage {
   }
 
   getContacts(){
-    let url = "http://iron.controlsoft.kz/mobile-app.php";
+    let url = "http://ironaddicts.kz/admin/mobile-app.php";
     let postData = new FormData();
     postData.append("action", "getContacts");
     let req = this.http.post(url, postData)

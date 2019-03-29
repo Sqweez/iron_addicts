@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as $ from "jquery";
 import {CartPage} from "../cart/cart";
 import {Http} from "@angular/http";
+import {ItemsInfoPage} from "../items-info/items-info";
 
 /**
  * Generated class for the ShopHistoryPage page.
@@ -23,6 +24,10 @@ export class ShopHistoryPage {
     this.getShopHistory();
   }
 
+  pushToPage(item) {
+    this.navCtrl.push(ItemsInfoPage, {item: item});
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ShopHistoryPage');
   }
@@ -38,7 +43,7 @@ export class ShopHistoryPage {
 
   getShopHistory(){
     let user_id = Number(localStorage.getItem("user_id"));
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getShopHistory&user_id=" + user_id;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getSells&user_id=" + user_id;
     this.http.get(url).subscribe(res => {
         this.data = res;
         this.data = this.data._body;

@@ -86,14 +86,14 @@ export class MyApp {
 
     if (localStorage.getItem("user_name")) {
       let id = localStorage.getItem("user_id");
-      let url = "http://iron.controlsoft.kz/mobile-app.php?action=getPush&id=" + id;
+      let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getPush&id=" + id;
       this.http.get(url).subscribe(data => {
         this.request = data;
         this.request = this.request._body;
         let push = this.request;
         if (push == "") {
           let newPush = localStorage.getItem("push");
-          let url = "http://iron.controlsoft.kz/mobile-app.php?action=setPush&id=" + id + "&push=" + newPush;
+          let url = "http://ironaddicts.kz/admin/mobile-app.php?action=setPush&id=" + id + "&push=" + newPush;
           this.http.get(url).subscribe(() => {
           });
         }

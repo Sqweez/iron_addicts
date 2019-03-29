@@ -14,17 +14,15 @@
     <ion-title>IRON ADDICTS</ion-title>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content>
   <h3 style="font-size: large">История покупок</h3>
   <ion-list class="categories" no-lines>
-    <ion-item class="itemsList" *ngFor="let item of data" no-padding (click)="pushToPage(item)">
+    <ion-item class="itemsList" *ngFor="let item of data" no-padding (click)="pushToPage(item.item)">
       <div style="height: 100%;">
-        <img class="item-small-img" style="max-height: 80px;" [src]="'http://iron.controlsoft.kz/' + item.img" alt="">
+        <img class="item-small-img" style="max-height: 80px;" [src]="item.img" alt="">
         <div class="itemName" style="width: 60%;">{{item.product_name}}
         </div>
-        <div class="price" style="right: 30%;">{{item.price}} тенге</div>
+        <div class="price" style="left: 39%;">{{item.prodazhnaya_cena}} тенге</div>
         <div class="date">{{item.date}}</div>
       </div>
     </ion-item>

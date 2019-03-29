@@ -28,11 +28,13 @@ export class MakeOrderPage {
   response;
   balans;
   comment;
+  discount = 0;
   constructor(public cache: CacheService, public database: DatabaseProvider, public http: Http, public navCtrl: NavController, public navParams: NavParams) {
     this.data = this.navParams.get('data');
     this.cart = this.data[0];
     this.user_id = this.data[1];
     this.balans = this.data[2];
+    this.discount = this.data[3];
     console.log(this.cart);
     console.log(this.user_id);
     console.log(this.balans);
@@ -44,7 +46,7 @@ export class MakeOrderPage {
 
 
   buy(dostavka, oplata, comment) {
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=buy&data=" + this.cart + "&user_id=" + this.user_id + "&balans=" + this.balans + '&dostavka=' + dostavka + '&oplata=' + oplata + '&comment=' + comment;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=buy&data=" + this.cart + "&user_id=" + this.user_id + "&balans=" + this.balans + '&dostavka=' + dostavka + '&oplata=' + oplata + '&comment=' + comment + '&discount=' + this.discount;
     this.http.get(url).subscribe(data => {
       this.response = data;
       this.response = this.response._body;

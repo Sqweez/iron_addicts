@@ -38,7 +38,7 @@ export class ModalPage {
   }
 
   getItem(item) {
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name + "&price=" + item.product_price + "&massa=" + item.massa;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getGoodInfo&sub_id=" + item.podcategory_id + "&product_name=" + item.product_name + "&price=" + item.product_price + "&massa=" + item.massa;
     return this.http.get(url).subscribe(data => {
       this.request = data;
       this.request = this.request._body;

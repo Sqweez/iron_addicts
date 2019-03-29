@@ -25,6 +25,8 @@ export class CartPage {
   count;
   balance: any;
   response: any;
+  sellsHist: any;
+  choosenDiscount;
   constructor(public http: Http, public database: DatabaseProvider, public navCtrl: NavController, public navParams: NavParams) {
     this.carts = [];
     this.getBalance();
@@ -41,15 +43,20 @@ export class CartPage {
 
   ionViewDidLoad() {
     this.count = localStorage.getItem('cart-item-count');
+    this.http.get('http://ironaddicts.kz/admin/mobile-app.php?action=getSellsSummary&id=' + localStorage.getItem("user_id")).subscribe(data => {
+      this.sellsHist = data;
+      this.sellsHist = this.sellsHist._body;
+      localStorage.setItem("skidka", this.sellsHist);
+    });
   }
 
   getCost(a, b) {
     return a * b;
   }
 
-  getBalance(){
+  getBalance() {
     let user_id = Number(localStorage.getItem("user_id"));
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getBalance&user_id=" + user_id;
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getBalance&user_id=" + user_id;
     return this.http.get(url).subscribe(data => {
       this.balance = data;
       this.balance = this.balance._body;
@@ -66,7 +73,7 @@ export class CartPage {
     return count;
   }
 
-  getTotalCount(){
+  getTotalCount() {
     let count = 0;
     this.carts.forEach(function (item) {
       count += Number(item.count);
@@ -74,12 +81,32 @@ export class CartPage {
     return count;
   }
 
-  getTotalPrice() {
+  getTotalPrice(par) {
     let totalCount = 0;
     this.carts.forEach(function (item) {
       totalCount = totalCount + (item.count * item.product_price);
     });
-    return totalCount;
+
+    let discount = parseInt(localStorage.getItem("skidka"));
+
+    let summary_discount = 0;
+
+    if (totalCount >= 15000) {
+      summary_discount = 5;
+    }
+    if (totalCount >= 30000) {
+      summary_discount = 10;
+    }
+    let finalDisc = (discount >= summary_discount) ? discount : summary_discount;
+    finalDisc = finalDisc/100;
+    if (!discount || discount == 0) {
+      $("span#disc_text").html('Итого:');
+    }
+    else {
+      $("span#disc_text").html('Итого cо скидкой:');
+    }
+      this.choosenDiscount = discount;
+      return Math.floor(totalCount - (totalCount * finalDisc));
   }
 
   deleteItem(id, count) {
@@ -93,25 +120,25 @@ export class CartPage {
 
   updateProductCount(id, count, state, skladCount) {
     if (state == '+') {
-      if(count < skladCount){
+      if (count < skladCount) {
         this.database.updateProductCount(state, id, count + 1);
         this.count++;
       }
-      else{
+      else {
         let msg;
-        if(skladCount == 0){
+        if (skladCount == 0) {
           msg = "Выбранный вами товар отсутствует на складе";
         }
-        else if(skladCount == 1){
-          msg = "В наличие имеется только " + skladCount  + " единица выбранного товара!"
+        else if (skladCount == 1) {
+          msg = "В наличие имеется только " + skladCount + " единица выбранного товара!"
         }
-        else if(skladCount > 1 && skladCount < 5){
-          msg = "В наличие имеется только " + skladCount  + " единицы выбранного товара!"
+        else if (skladCount > 1 && skladCount < 5) {
+          msg = "В наличие имеется только " + skladCount + " единицы выбранного товара!"
         }
-        else{
-          msg = "В наличие имеется только " + skladCount  + " единиц выбранного товара!"
+        else {
+          msg = "В наличие имеется только " + skladCount + " единиц выбранного товара!"
         }
-       swal("Извините!", msg, "error");
+        swal("Извините!", msg, "error");
       }
     }
     else if (state == '-') {
@@ -124,32 +151,27 @@ export class CartPage {
       this.carts = data;
     });
   }
-  postBuy(){
+
+  postBuy() {
     let user_id = Number(localStorage.getItem("user_id"));
     this.getBalance();
     let balans = Number(localStorage.getItem("balans"));
     let cart = Array.from(this.carts);
     let data = JSON.stringify(cart);
-    let array = [data, user_id, balans];
-    this.navCtrl.push(MakeOrderPage, {data : array});
-    /*let url = "http://iron.controlsoft.kz/mobile-app.php?action=buy&data="  + data + "&user_id=" + user_id + "&balans=" + balans;
-    this.http.get(url).subscribe(data => {
-      this.response = data;
-      this.response = this.response._body;
-      console.log(this.response);
-      this.database.clearCart();
-      localStorage.setItem("cart-item-count", String(0));
-      this.navCtrl.setRoot(HomePage);
-    });*/
+    let array = [data, user_id, balans, this.choosenDiscount];
+    this.navCtrl.push(MakeOrderPage, {data: array});
   }
+
   ionViewDidEnter() {
     $('#3').addClass('activeHighlight');
     $('#3 > div > div > ion-label > img').removeClass('sideBarIcons');
   }
-  ionViewDidLeave(){
+
+  ionViewDidLeave() {
     $('#3').removeClass('activeHighlight');
     $('#3 > div > div > ion-label > img').addClass('sideBarIcons');
   }
+
   addClass() {
     let element = $('.content');
     element.addClass("blurredContent");
@@ -162,19 +184,19 @@ export class CartPage {
         swal("", "Для совершения покупок вы должны быть зарегистрированы", "error")
       }
       else {
-          swal({
-            title: "Внимание!",
-            text: "Вы уверены, что хотите купить выбранные товары?",
-            buttons: ["Нет", "Да"],
-            icon: "warning"
-          }).then(res => {
-            if(res){
-              this.postBuy();
-            }
-          })
-        }
+        swal({
+          title: "Внимание!",
+          text: "Вы уверены, что хотите купить выбранные товары?",
+          buttons: ["Нет", "Да"],
+          icon: "warning"
+        }).then(res => {
+          if (res) {
+            this.postBuy();
+          }
+        })
       }
-    else{
+    }
+    else {
       swal("Внимание!", "Ваша корзина пуста или товары, которые вы пытаетесь купить на данный момент недоступны!", "error");
     }
 

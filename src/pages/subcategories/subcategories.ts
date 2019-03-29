@@ -54,7 +54,7 @@ export class SubcategoriesPage {
     this.count = Number(localStorage.getItem("cart-item-count"));
   }
   getSubCategories(id) {
-    let url = "http://iron.controlsoft.kz/mobile-app.php";
+    let url = "http://ironaddicts.kz/admin/mobile-app.php";
     let postData = new FormData();
     postData.append("action", "getSubCategories");
     postData.append("categorie_id", id);

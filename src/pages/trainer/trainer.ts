@@ -21,7 +21,7 @@ export class TrainerPage {
   }
 
   getPromocodes = () => {
-    let url = "http://iron.controlsoft.kz/mobile-app.php?action=getPromocodes&user=" + localStorage.getItem("user_id");
+    let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getPromocodes&user=" + localStorage.getItem("user_id");
     this.http.get(url).subscribe(data => {
       this.promocodes = data;
       this.promocodes = JSON.parse(this.promocodes._body);
@@ -39,7 +39,7 @@ export class TrainerPage {
   }
 
   deletePromocode(id) {
-    this.http.get("http://iron.controlsoft.kz/mobile-app.php?id=" + id + "&action=deletePromocode").subscribe(data => {
+    this.http.get("http://ironaddicts.kz/admin/mobile-app.php?id=" + id + "&action=deletePromocode").subscribe(data => {
       this.getPromocodes();
     })
   }
@@ -58,13 +58,13 @@ export class TrainerPage {
     let modalPage = this.modalCtrl.create(ModalPromocodePage);
     modalPage.onDidDismiss(data => {
       if (data != undefined) {
-        let url = 'http://iron.controlsoft.kz/mobile-app.php';
+        let url = 'http://ironaddicts.kz/admin/mobile-app.php';
         let formData = new FormData();
         formData.append("promocode", data.data);
         formData.append("user", localStorage.getItem("user_id"));
         formData.append("action", 'generatePromocode');
         this.http.post(url, formData).subscribe(data => {
-          let url = "http://iron.controlsoft.kz/mobile-app.php?action=getPromocodes&user=" + localStorage.getItem("user_id");
+          let url = "http://ironaddicts.kz/admin/mobile-app.php?action=getPromocodes&user=" + localStorage.getItem("user_id");
           this.http.get(url).subscribe(data => {
             this.promocodes = data;
             this.promocodes = JSON.parse(this.promocodes._body);

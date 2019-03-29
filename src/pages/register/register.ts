@@ -60,7 +60,7 @@ export class RegisterPage {
         }
         data.fio = data.fio.join(" ");
         console.log(data.fio);
-        let url = "http://iron.controlsoft.kz/mobile-app.php";
+        let url = "http://ironaddicts.kz/admin/mobile-app.php";
         let confirmCode = Math.floor(Math.random()*(9999-1000+1)+1000);
         let postData = new FormData();
         postData.append("action", "auth");
